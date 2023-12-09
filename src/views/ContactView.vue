@@ -71,7 +71,7 @@
               </div>
 
               <div class="col-md-6 ">
-                <input type="number" class="form-control" name="phone" autocomplete="off"
+                <input type="text" maxlength="16" class="form-control" name="phone" autocomplete="off"
                   :class="{ 'is-invalid': v$.phone.$error }" placeholder="Phone Number" v-model="state.phone">
               </div>
 
@@ -115,11 +115,11 @@ export default {
 
   setup() {
     const state = reactive({
-      name: 'viral',
-      email: 'viral@topmail.com',
-      phone: '123-1238989',
-      subject: 'Test email',
-      description: 'body goes here',
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      description: '',
       submitted: false,
       res_msg: ""
     })
@@ -128,7 +128,7 @@ export default {
       return {
         name: { required },
         email: { required, email: email },
-        phone: { required, maxLength: maxLength(12) },
+        phone: { required, maxLength: maxLength(16) },
         subject: { required },
         description: { required },
       }
@@ -151,11 +151,11 @@ export default {
       if (!this.v$.$error) {
 
         let body_params = {}
-        body_params.name = this.state.name;
-        body_params.email = this.state.email;
-        body_params.subject = this.state.subject;
-        body_params.phone = this.state.phone;
-        body_params.description = this.state.description;
+        body_params.Name = this.state.name;
+        body_params.EmailAddress = this.state.email;
+        body_params.PhoneNumber = this.state.phone;
+        body_params.Subject = this.state.subject;
+        body_params.Content = this.state.description;
 
 
         const requestOptions = {
@@ -167,22 +167,23 @@ export default {
         this.state.submitted = true
         const that = this
 
-        axios.get('/api/Contact',  {
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-            // Add other headers if needed
-          },
-        }
-        ).then(response=>{
+        axios.post('/Contact', JSON.stringify(body_params)
+          , {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+              // Add other headers if needed
+            },
+          }
+        ).then(response => {
           that.v$.$reset();
-            that.state.name = "";
-            that.state.email = "";
-            that.state.subject = "";
-            that.state.phone = "";
-            that.state.description = "";
-            that.state.submitted = false;
-            that.state.res_msg = "Inquiry submitted successfully"
+          that.state.name = "";
+          that.state.email = "";
+          that.state.subject = "";
+          that.state.phone = "";
+          that.state.description = "";
+          that.state.submitted = false;
+          that.state.res_msg = "Inquiry submitted successfully"
         })
 
         // fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)

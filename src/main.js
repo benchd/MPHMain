@@ -8,7 +8,7 @@ import 'bootstrap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './assets/css/style.css'
 
-// axios.defaults.baseURL = "/api"
+axios.defaults.baseURL = "http://localhost:5020/api"
 
 const app = createApp(App)
 

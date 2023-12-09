@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
-  base:"/dist/",
+  // base:"/dist/",
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -18,8 +18,8 @@ export default defineConfig({
 
   server: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:5020',
+      '^/Contact': {
+        target: 'http://localhost:5020/api/Contact',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
