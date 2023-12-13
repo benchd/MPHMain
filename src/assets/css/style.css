@@ -248,6 +248,7 @@ section {
   color: #013289;
   white-space: nowrap;
   transition: 0.3s;
+  box-shadow: none;
 }
 
 .navbar a i,
@@ -271,6 +272,7 @@ section {
   margin-left: 10px;
   border-radius: 4px;
   color: #fff;
+ 
 }
 
 .navbar .getstarted:hover,

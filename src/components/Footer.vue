@@ -15,7 +15,7 @@
             </a>
             <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta
               donna mare fermentum iaculis eu non diam phasellus.</p>
-            <div class="social-links mt-3">
+            <div class="social-links mt-3" v-if="socialIcon">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -41,8 +41,7 @@
             <p>
               P.O. Box 112<br>
               Piney Flats,<br> TN 37686-0112 <br><br>
-              <strong>Phone:</strong> +1 844 376 0001<br>
-              <strong>Email:</strong> support@myprohelper.com<br>
+              <strong>Phone:</strong> 844 376 0001<br>              
             </p>
           </div>
         </div>
@@ -65,6 +64,11 @@
 export default {
   name: 'Footer',
   methods: {
+    data(){
+      return {
+        socialIcon:false
+      }
+    },
     footerScroll() {
       const backtotop = this.$refs.backToTop; // assign the reference in variable
       window.addEventListener("load", () => {
