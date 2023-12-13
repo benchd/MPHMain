@@ -92,9 +92,14 @@
                 </div>
 
               </div>
-              <div class="col-md-12 text-center" v-if="state.res_msg"
-                :class="{ 'text-danger': !state.res_msg, 'text-success': state.res_msg }">
-                {{ state.res_msg }}
+              <div class="col-md-12 text-center" v-if="state.res_msg">
+                <Transition>
+                  <div class="alert text-white h5"
+                    :class="{ 'alert-danger bg-danger': !state.res_msg, 'alert-success bg-success ': state.res_msg }"
+                    role="alert">
+                    {{ state.res_msg }}
+                  </div>
+                </Transition>
               </div>
 
             </div>
@@ -184,24 +189,16 @@ export default {
           that.state.description = "";
           that.state.submitted = false;
           that.state.res_msg = "Inquiry submitted successfully"
+          setTimeout(() => {
+            this.state.res_msg = ""
+          }, 4000)
         })
-
-        // fetch("https://jsonplaceholder.typicode.com/posts", requestOptions)
-        //   .then(response => {
-        //     that.v$.$reset();
-        //     that.state.name = "";
-        //     that.state.email = "";
-        //     that.state.subject = "";
-        //     that.state.phone = "";
-        //     that.state.description = "";
-        //     that.state.submitted = false;
-        //     that.state.res_msg = "Inquiry submitted successfully"
-        //   })
-
       }
     }
   },
-
+  mounted(){
+    
+  }
 }
 </script>
 <style>
@@ -215,4 +212,15 @@ export default {
   padding: 100px 0 95px;
   position: relative;
 }
-</style>
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style> 
