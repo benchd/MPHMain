@@ -38,7 +38,7 @@
               anywhere else.</p>
             <p>What's the catch? We'd like you to meet with us for one hour sitting in a conference room chair and
               providing feedback on our HVAC service product based on your HVAC service experience.</p>
-            <h4>Who are we, and why do we want to meet with you?</h4>
+            
             <p>We are a local company right here in Johnson City. We are Co-Founders of an application to help manage the
               Scheduling, Estimating, Invoicing, Payments, Assets, Vendors and other aspects specifically designed for use
               in a small HVAC installation and service business.</p>
