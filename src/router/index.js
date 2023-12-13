@@ -11,6 +11,7 @@ const router = createRouter({
     return { top: 0 }
     
   },
+  linkActiveClass: "active",
   routes: [
     {
       path: '/',

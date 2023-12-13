@@ -1118,8 +1118,8 @@ section {
 .pricing .featured {
   width: 200px;
   position: absolute;
-  top: 18px;
-  right: -68px;
+  top: 34px;
+  right: -50px;
   transform: rotate(45deg);
   z-index: 1;
   font-size: 14px;

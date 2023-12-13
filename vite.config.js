@@ -14,16 +14,4 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  cors: false,
-
-  server: {
-    proxy: {
-      '^/Contact': {
-        target: 'http://localhost:5020/api/Contact',
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-    },
-  },
 })
