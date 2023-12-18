@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
   <footer id="footer" class="footer">
 
@@ -27,11 +23,13 @@
             <h4>Resources</h4>
             <ul>
               <li><i class="bi bi-chevron-right"></i> <a href="#">Pricing</a></li>
-              <li><i class="bi bi-chevron-right"></i>                 
-                 <router-link to="/contact">Contact Us</router-link>
+              <li><i class="bi bi-chevron-right"></i>
+                <router-link to="/contact">Contact Us</router-link>
               </li>
-              <li><i class="bi bi-chevron-right"></i> <a target="_blank" href="https://mph2.myprohelper.com/Terms">Terms & Condition</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a target="_blank" href="https://mph2.myprohelper.com/Privacy">Privacy policy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a target="_blank" href="https://mph2.myprohelper.com/Terms">Terms &
+                  Condition</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a target="_blank"
+                  href="https://mph2.myprohelper.com/Privacy">Privacy policy</a></li>
             </ul>
           </div>
 
@@ -41,7 +39,7 @@
             <p>
               P.O. Box 112<br>
               Piney Flats,<br> TN 37686-0112 <br><br>
-              <strong>Phone:</strong> 844 376 0001<br>              
+              <strong>Phone:</strong> 844 376 0001<br>
             </p>
           </div>
         </div>
@@ -63,12 +61,13 @@
 <script>
 export default {
   name: 'Footer',
+  data() {
+    return {
+      socialIcon: false
+    }
+  },
   methods: {
-    data(){
-      return {
-        socialIcon:false
-      }
-    },
+
     footerScroll() {
       const backtotop = this.$refs.backToTop; // assign the reference in variable
       window.addEventListener("load", () => {

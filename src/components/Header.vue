@@ -21,7 +21,7 @@
           </li>
           <li><a class="start_free scrollto" href="javascript://" @click="modal.show()">Start Free Trial</a>
           </li>
-          <li><a class="getstarted scrollto ms-0" target="_blank" href="https://myprohelper.com/login">Sign in</a></li>
+          <li><a class="getstarted scrollto ms-0 signin" v-tooltip title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" target="_blank" href="https://myprohelper.com/login">Sign in</a></li>
         </ul>
         <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
       </nav>
@@ -76,7 +76,9 @@
 </template>
 
 <script>
-import { Modal } from "bootstrap";
+
+import { tooltip } from './Tooltip';
+
 export default {
   name: 'Header',
   data() {
@@ -85,6 +87,8 @@ export default {
       modal: null,
     }
   },
+  directives: { tooltip: tooltip },
+
   methods: {
     showMenu() {
       this.navbar_mobile = (this.navbar_mobile) ? false : true;

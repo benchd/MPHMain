@@ -66,12 +66,12 @@
               </div>
 
               <div class="col-md-6 ">
-                <input type="email" class="form-control" name="email" autocomplete="off"
+                <input type="text" class="form-control" name="email" autocomplete="off"
                   :class="{ 'is-invalid': v$.email.$error }" placeholder="Your Email" v-model="state.email">
               </div>
 
               <div class="col-md-6 ">
-                <input type="text" maxlength="16" class="form-control" name="phone" autocomplete="off"
+                <input type="text" maxlength="16" class="form-control" name="phone" autocomplete="off" v-maska data-maska="###-###-####"
                   :class="{ 'is-invalid': v$.phone.$error }" placeholder="Phone Number" v-model="state.phone">
               </div>
 
@@ -116,6 +116,8 @@ import useVuelidate from '@vuelidate/core'
 import { required, email, maxLength } from '@vuelidate/validators'
 import { reactive, computed } from 'vue'
 import axios from 'axios'
+import { vMaska } from "maska"
+
 export default {
 
   setup() {
@@ -147,6 +149,7 @@ export default {
     }
   },
 
+  directives: { maska: vMaska },
 
   methods: {
     onSubmit() {
