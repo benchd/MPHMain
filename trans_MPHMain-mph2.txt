@@ -1,0 +1,5 @@
+open sftp://alta@mph2.myprohelper.com/ -hostkey="2SXrOcUDeBPZz98EbLWzb+VGhrSEjOLYcxZ4srRRb4I=" -privatekey="c:\MyProHelper\keys\david-private.ppk" -passphrase="bigsky"
+lcd dist
+cd /alta/MPHMain/staging
+synchronize remote
+
