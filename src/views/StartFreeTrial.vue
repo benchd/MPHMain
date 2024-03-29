@@ -169,7 +169,7 @@ export default {
       setup() {
 
             const $cookies = inject('$cookies');
-            let CustDetail = $cookies.get('cust-detail') || {};
+            let CustDetail = $cookies.get('MPHQR1') || {};
 
 
             const state = reactive({
@@ -308,7 +308,7 @@ export default {
                         ).then(response => {
                               if (response.status == 200) {
                                     that.o$.$reset();
-                                    $cookies.remove('cust-detail');
+                                    $cookies.remove('MPHQR1');
                                     this.otpState.otpSubmitted = false;
                                     that.state.EmailAddress = "";
                                     that.state.isError = false;

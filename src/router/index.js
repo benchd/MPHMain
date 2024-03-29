@@ -8,7 +8,7 @@ import StartFreeTrial from '../views/StartFreeTrial.vue'
 async function getParams(to) {  
   if (Object.keys(to.query).length){
       console.log(to.query);
-      $cookies.set('cust-detail',to.query)
+      $cookies.set('MPHQR1',to.query)
     return { path: to.path, query: {}, hash: to.hash }
   }
 }
@@ -43,7 +43,7 @@ const router = createRouter({
       component: ContactView
     },
     {
-      path: '/custmer-detail',
+      path: '/customer-detail',
       name: 'customer_detail',      
       beforeEnter: getParams,
       component: StartFreeTrial
