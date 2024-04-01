@@ -18,14 +18,14 @@
       </div>
       <section class="feature_content">
             <div class="container">
-                  <!-- <div class="row">
+                  <div class="row">
                         <div class="col-12">
                               <header class="section-header">
                                     <h2>Start Free Trial</h2>
-
+                                    <h6>Unlock limitless possibilities with our free trial! Dive into a world of premium features and exclusive content, risk-free. Experience firsthand how our platform revolutionizes your workflow, whether it's boosting productivity, enhancing creativity, or simplifying tasks. With no strings attached, explore all the tools and resources tailored to your needs. Discover why thousands trust us for their success. Start your free trial today and embark on a journey towards unparalleled efficiency and innovation. Don't miss out on this opportunity to elevate your endeavors to new heights. Join us and let's shape the future together!</h6>
                               </header>
                         </div>
-                  </div> -->
+                  </div>
                   <div class="row justify-content-center position-relative">
                         <div class="col-lg-6" v-if="!state.otp_section">
                               <form name="frm-contact" @submit.prevent="onUserSubmit" method="post"
