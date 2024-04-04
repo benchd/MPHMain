@@ -1,9 +1,8 @@
 #!/bin/bash
-cd /alta/Front
-rm -rv !("appsettings.json"|"UseNewDeploy.sh"|"staging"|"Logs")
-cp -rp ../safety-Front/* ./
-#chmod +x MPHBackendServer
+cd /alta/MPHMain
+rm -rv !("appsettings.json"|"UseNewDeploy-MPHMain.sh"|"staging"|"Logs")
+cp -rp ../safety-MPHMain/* ./
 chmod +x *.sh
-./Startme-Front.sh
+#./Startme-MPHMain.sh
 ./ShowRunning.sh
-#cp -a -r ../safety-Front/* ./
+#cp -a -r ../safety-MPHMain/* ./
