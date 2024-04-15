@@ -12,7 +12,7 @@ window.bootstrap = bootstrap;
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './assets/css/style.css'
 
-axios.defaults.baseURL = "http://localhost:5020/api"
+axios.defaults.baseURL = "http://localhost:5011/api"
 
 const app = createApp(App)
 
