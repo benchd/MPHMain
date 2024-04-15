@@ -3,6 +3,15 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import Features from '../views/Features.vue'
 import ContactView from '../views/ContactView.vue'
+import StartFreeTrial from '../views/StartFreeTrial.vue'
+
+async function getParams(to) {  
+  if (Object.keys(to.query).length){
+      console.log(to.query);
+      $cookies.set('MPHQR1',to.query)
+    return { path: to.path, query: {}, hash: to.hash }
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +41,12 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',      
       component: ContactView
+    },
+    {
+      path: '/customer-detail',
+      name: 'customer_detail',      
+      beforeEnter: getParams,
+      component: StartFreeTrial
     }
   ]
 })
