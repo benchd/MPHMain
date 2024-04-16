@@ -15,9 +15,9 @@
           <!-- <a class="nav-link scrollto active" href="/">Home</a></li> -->
           <!-- <li><a class="nav-link scrollto" :to="about">About Us</a></li> -->
           <!-- <li><a class="nav-link scrollto" href="/features">Features</a></li> -->
-          <li><a class="nav-link scrollto" target="_blank" href="https://mph2.myprohelper.com/Terms">Terms & Condition</a>
+          <li><a class="nav-link scrollto" target="_blank"  v-bind:href="tcUrl">Terms & Condition</a>
           </li>
-          <li><a class="nav-link scrollto" target="_blank" href="https://mph2.myprohelper.com/Privacy">Privacy Policy</a>
+          <li><a class="nav-link scrollto" target="_blank"  v-bind:href="privacyUrl">Privacy Policy</a>
           </li>
           <router-link to="/customer-detail" class="start_free scrollto">Start Free Trial</router-link>
           <!-- <li><a class="start_free scrollto" href="javascript://" @click="modal.show()"></a>
@@ -86,7 +86,9 @@ export default {
     return {
       navbar_mobile: false,
       modal: null,
-      maineLoginUrl : "https://myprohelper.com/login"
+      maineLoginUrl : "https://myprohelper.com/login",
+      privacyUrl: "https://mph2.myprohelper.com/Privacy",
+      tcUrl: "https://mph2.myprohelper.com/Terms"
     }
   },
   directives: { tooltip: tooltip },
@@ -115,7 +117,13 @@ export default {
     },
   },
   beforeMount(){
-    this.maineLoginUrl = window.location.protocol+"//"+window.location.hostname+"/login";    
+
+    let protocol = window.location.protocol;
+    let host_name = window.location.hostname;
+
+    this.maineLoginUrl = protocol+"//"+host_name+"/login";    
+    this.privacyUrl = protocol+"//"+host_name+"/Privacy";
+    this.tcUrl = protocol+"//"+host_name+"/Terms";
   },
   mounted() {
     this.vueOnScroll()
