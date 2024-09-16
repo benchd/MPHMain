@@ -38,8 +38,8 @@
             <h4>Contact Us</h4>
             <p>
               P.O. Box 112<br>
-              Piney Flats,<br> TN 37686-0112 <br><br>
-              <strong>Phone:</strong> 844 376 0001<br>
+              Piney Flats,TN 37686-0112 <br><br>
+              <strong>Phone:</strong> (844) 376-0001<br>
             </p>
           </div>
         </div>
@@ -48,7 +48,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>MyProHelper</span></strong>. All Rights Reserved
+        &copy; Copyright 2023 <strong><span>MyProHelper</span></strong>. All Rights Reserved
       </div>
     </div>
   </footer><!-- End Footer -->
