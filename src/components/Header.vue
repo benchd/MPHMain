@@ -35,11 +35,18 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Start free trial</b></h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Start Free Trial</b></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body contact">
-          <form method="post" class="php-email-form bg-transparent p-0">
+          <p class="" style="margin-bottom: 0;">
+            In order to start your Free Trial for <b>MyProHelper</b>, please contact us at:
+          </p>
+          <p style="color: #09426a; font-size: 17px; font-weight: bold;" class="text-center"><i class="bi bi-telephone-fill"></i> (844) 376-0001</p>
+          <p class=""><h5 class="text-center text-success">Thank you for your business.</h5></p>
+
+
+          <!-- <form method="post" class="php-email-form bg-transparent p-0">
             <div class="row gy-4">
 
               <div class="col-12">
@@ -60,15 +67,11 @@
 
               
               <div class="col-md-12 text-center">
-                <!--  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div> -->
-
                 <button type="submit">Submit</button>
               </div>
 
             </div>
-          </form>
+          </form> -->
         </div>
       </div>
     </div>
