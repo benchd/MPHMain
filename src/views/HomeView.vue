@@ -110,7 +110,7 @@
                 <li>No installation required</li>
                 <li>90 day free trial</li>
                 <li>Free Customer Support</li>
-                <li>Compatible with iOS and Android devices</li>
+                <li>Runs on with iOS and Android Phones</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -120,13 +120,13 @@
             <div class="box">
               
               <h3 style="color: #65c600;">Monthly Plan</h3>
-              <div class="price"><sup>$</sup>19<span> / Month</span></div>
+              <div class="price"><sup>$</sup>119.95<span> / Month</span></div>
               <img src="@/assets/img/pricing-starter.png" class="img-fluid" alt="">
               <ul>
                 <li>No Long-term commitment</li>
                 <li>90 day free trial</li>
                 <li>Free Customer Support</li>
-                <li>Compatible with iOS and Android devices</li>
+                <li>Runs on iOS and Android Phones</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -135,13 +135,13 @@
           <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
               <h3 style="color: #ff901c;">Yearly Plan</h3>
-              <div class="price"><sup>$</sup>15<span> / Month / Paid Yearly</span></div>
+              <div class="price"><sup>$</sup>99.95<span> / Month / Paid Yearly</span></div>
               <img src="@/assets/img/pricing-business.png" class="img-fluid" alt="">
               <ul>
                 <li>Most economical plan</li>
                 <li>90 day free trial</li>
                 <li>Free Customer Support</li>                
-                <li>Compatible with iOS and Android devices</li>
+                <li>Runs on iOS and Android Phones</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -176,7 +176,7 @@
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Alex Tinker</h3>
+                  <h3>Alex T.</h3>
                   <h4></h4>
                 </div>
               </div>
@@ -190,7 +190,7 @@
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Frank Porter</h3>
+                  <h3>Frank P.</h3>
                   <h4></h4>
                 </div>
               </div>
@@ -203,7 +203,7 @@
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Mark Druthers</h3>
+                  <h3>Mark D.</h3>
                   <h4></h4>
                 </div>
               </div>
@@ -217,8 +217,8 @@
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Tom Alexander</h3>
-                  <h4>Lorem</h4>
+                  <h3>Tom A.</h3>
+                  <h4></h4>
                 </div>
               </div>
             </swiper-slide>
@@ -232,7 +232,7 @@
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Mack Evans</h3>
+                  <h3>Mack E.</h3>
                   <h4></h4>
                 </div>
               </div>
@@ -246,7 +246,7 @@
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Gary Rutherford</h3>
+                  <h3>Gary R.</h3>
                   <h4></h4>
                 </div>
               </div>
