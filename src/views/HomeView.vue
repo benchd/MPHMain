@@ -175,8 +175,8 @@
                   I would sometimes miss an appointment because of a lost or misplaced paper note with the name and address, but not anymore. This helps keep everything together in one place.
                 </p>
                 <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Alex T.</h3>
+                  <img src="@/assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                  <h3>Mark D.</h3>
                   <h4></h4>
                 </div>
               </div>
@@ -189,7 +189,7 @@
                   So I can make sure that my markup is reasonable and covering my costs.
                 </p>
                 <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <img src="@/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
                   <h3>Frank P.</h3>
                   <h4></h4>
                 </div>
@@ -202,8 +202,8 @@
                   The app makes it easier to keep track of all the parts we have and where they are stored.
                 </p>
                 <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Mark D.</h3>
+                  <img src="@/assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                  <h3>Alex T.</h3>
                   <h4></h4>
                 </div>
               </div>

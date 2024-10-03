@@ -64,7 +64,14 @@
               <div class="col-12 ">
                 <input type="number" class="form-control" name="number" placeholder="Phone Number" required="">
               </div>
-
+<! -- Karen added 
+              <div class="col-12 ">
+                <input type="MainPhone" class="form-control" name="MainPhone" placeholder="Company main Phone Number" required="">
+              </div>
+<! -- Karen added 
+              <div class="col-12 ">
+                <input type="MainEmail" class="form-control" name="MainEmail" placeholder="Company Main Email" required="">
+              </div>
               
               <div class="col-md-12 text-center">
                 <button type="submit">Submit</button>
