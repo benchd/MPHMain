@@ -172,12 +172,52 @@
               <div class="testimonial-item">
 
                 <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium
-                  quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  I would sometimes miss an appointment because of a lost or misplaced paper note with the name and address, but not anymore. This helps keep everything together in one place.
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Lorem Ipsum</h3>
+                  <h3>Alex Tinker</h3>
+                  <h4></h4>
+                </div>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="testimonial-item">
+
+                <p>
+                  This helped me to track what I have paid for the parts and what we charged for them on invoices. 
+                  So I can make sure that my markup is reasonable and covering my costs.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <h3>Frank Porter</h3>
+                  <h4></h4>
+                </div>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="testimonial-item">
+
+                <p>
+                  The app makes it easier to keep track of all the parts we have and where they are stored.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <h3>Mark Druthers</h3>
+                  <h4></h4>
+                </div>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="testimonial-item">
+
+                <p>
+                  Helps keep jobs and supplies organized for me and my workers.  No need to return
+                  to the store for a part if we already have it on the shelf or in one of our trucks.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <h3>Tom Alexander</h3>
                   <h4>Lorem</h4>
                 </div>
               </div>
@@ -186,13 +226,14 @@
               <div class="testimonial-item">
 
                 <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium
-                  quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  We can collect payment for jobs faster by letting them pay using a credit card 
+                  while we are there. A lot easier and quicker than a check that has to be deposited 
+                  and then wait on it to clear, or maybe bounce.
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Lorem Ipsum</h3>
-                  <h4>Lorem</h4>
+                  <h3>Mack Evans</h3>
+                  <h4></h4>
                 </div>
               </div>
             </swiper-slide>
@@ -200,55 +241,13 @@
               <div class="testimonial-item">
 
                 <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium
-                  quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  This program saves us time and gas money by making it easy to schedule jobs
+                  in sequence that are close together.
                 </p>
                 <div class="profile mt-auto">
                   <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Lorem Ipsum</h3>
-                  <h4>Lorem</h4>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="testimonial-item">
-
-                <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium
-                  quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Lorem Ipsum</h3>
-                  <h4>Lorem</h4>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="testimonial-item">
-
-                <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium
-                  quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Lorem Ipsum</h3>
-                  <h4>Lorem</h4>
-                </div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="testimonial-item">
-
-                <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium
-                  quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Lorem Ipsum</h3>
-                  <h4>Lorem</h4>
+                  <h3>Gary Rutherford</h3>
+                  <h4></h4>
                 </div>
               </div>
             </swiper-slide>
