@@ -96,7 +96,7 @@ export default {
       navbar_mobile: false,
       modal: null,
       maineLoginUrl : "https://myprohelper.com/login",
-      privacyUrl: "https://mph2.myprohelper.com/Privacy",
+      privacyUrl: "https://myprohelper.com:5005/api/privacypolicy",
       tcUrl: "https://mph2.myprohelper.com/Terms"
     }
   },
@@ -129,9 +129,15 @@ export default {
 
     let protocol = window.location.protocol;
     let host_name = window.location.hostname;
+    let port = window.location.port;
 
     this.maineLoginUrl = protocol+"//"+host_name+"/login";    
-    this.privacyUrl = protocol+"//"+host_name+"/Privacy";
+    if(port != ""){
+      this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`;
+    }
+    else{
+      this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
+    }
     this.tcUrl = protocol+"//"+host_name+"/Terms";
   },
   mounted() {
