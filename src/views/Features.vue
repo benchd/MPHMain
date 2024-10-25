@@ -150,6 +150,17 @@
                               </div>
                         </div>
                   </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                        <div class="features_box">
+                              <div class="icon_wrapper text-center">
+                                    <img src="@/assets/img/Features/Inventory_Management.png" class="img-fluid">
+                              </div>
+                              <div class="content">
+                                    <h4>Inventory Management</h4>
+                                    <p>Track and manage parts, supplies, and assets, including storage locations such as trucks, vans, and tools.</p>
+                              </div>
+                        </div>
+                  </div>
             </div>
          </div>
     </section>
