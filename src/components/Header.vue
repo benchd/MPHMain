@@ -19,9 +19,10 @@
           </li>
           <li><a class="nav-link scrollto" target="_blank" href="https://mph2.myprohelper.com/Privacy">Privacy Policy</a>
           </li>
-          <li><a class="start_free scrollto" href="javascript://" @click="modal.show()">Start Free Trial</a>
-          </li>
-          <li><a class="getstarted scrollto ms-0 signin" v-tooltip title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" target="_blank" href="https://myprohelper.com/login">Login</a></li>
+          <router-link to="/customer-detail" class="start_free scrollto">Start Free Trial</router-link>
+          <!-- <li><a class="start_free scrollto" href="javascript://" @click="modal.show()"></a>
+          </li> -->
+          <li><a class="getstarted scrollto ms-0 signin" v-tooltip title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" target="_blank" v-bind:href="maineLoginUrl">Login</a></li>
         </ul>
         <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
       </nav>
@@ -85,6 +86,7 @@ export default {
     return {
       navbar_mobile: false,
       modal: null,
+      maineLoginUrl : "https://myprohelper.com/login"
     }
   },
   directives: { tooltip: tooltip },
@@ -111,6 +113,9 @@ export default {
         }
       });
     },
+  },
+  beforeMount(){
+    this.maineLoginUrl = window.location.protocol+"//"+window.location.hostname+"/login";    
   },
   mounted() {
     this.vueOnScroll()

@@ -107,10 +107,10 @@
               <img src="@/assets/img/pricing-free.png" class="img-fluid" alt="">
               <ul>
                 <li>No installation required</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
-                <li class="na">Compatible with IOS and Android Phones</li>
+                <li class="na">Runs on iOS and Android phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -120,14 +120,14 @@
             <div class="box">
               <span class="featured">Featured</span>
               <h3 style="color: #65c600;">Monthly Plan</h3>
-              <div class="price"><sup>$</sup>19<span> / mo</span></div>
+              <div class="price"><sup>$</sup>131.95<span> / mo</span></div>
               <img src="@/assets/img/pricing-starter.png" class="img-fluid" alt="">
               <ul>
                 <li>No installation required</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
-                <li class="na">Compatible with IOS and Android Phones</li>
+                <li class="na">Runs on iOS and Android phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -136,14 +136,14 @@
           <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
               <h3 style="color: #ff901c;">Yearly Plan</h3>
-              <div class="price"><sup>$</sup>29<span> / Year</span></div>
+              <div class="price"><sup>$</sup>109.95<span> / Year</span></div>
               <img src="@/assets/img/pricing-business.png" class="img-fluid" alt="">
               <ul>
                 <li>No installation required</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
-                <li class="na">Compatible with IOS and Android Phones</li>
+                <li class="na">Runs on iOS and Android phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
