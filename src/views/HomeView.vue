@@ -120,7 +120,7 @@
             <div class="box">
               
               <h3 style="color: #65c600;">Monthly Plan</h3>
-              <div class="price"><sup>$</sup>119.95<span> / Month</span></div>
+              <div class="price"><sup>$</sup>131.95<span> / Month</span></div>
               <img src="@/assets/img/pricing-starter.png" class="img-fluid" alt="">
               <ul>
                 <li>No Long-term commitment</li>
@@ -135,7 +135,7 @@
           <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
               <h3 style="color: #ff901c;">Yearly Plan</h3>
-              <div class="price"><sup>$</sup>99.95<span> / Month / Paid Yearly</span></div>
+              <div class="price"><sup>$</sup>109.95<span> / Month / Paid Yearly</span></div>
               <img src="@/assets/img/pricing-business.png" class="img-fluid" alt="">
               <ul>
                 <li>Most economical plan</li>
