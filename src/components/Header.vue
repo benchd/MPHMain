@@ -138,13 +138,13 @@ export default {
     // in the appsettings.json and has the port and ends with /
     if(port != ""){
     //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
-          this.privacyUrl = protocol+"//"+api_name+"PrivacyPolicy";
+          this.privacyUrl = api_name+"PrivacyPolicy";
     }
     else{
     //  this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
-        this.privacyUrl = protocol+"//"+api_name+"PrivacyPolicy";
+        this.privacyUrl = api_name+"PrivacyPolicy";
     }
-    this.tcUrl = protocol+"//"+host_name+"/Terms";
+    this.tcUrl = "protocol"+"//"+host_name+"/Terms";
   },
   mounted() {
     this.vueOnScroll()
