@@ -160,8 +160,7 @@ if (window.location.origin == "http://localhost:5173")
   }
   else
   {
-    //this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
-    this.privacyUrl = window.location.origin+ "/api/Privacypolicy";
+    this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
     this.tcUrl = protocol+"//"+host_name+"/Terms";
   }
 
