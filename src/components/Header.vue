@@ -100,7 +100,12 @@ export default {
       privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
 //      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
       //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works but old way with pdf
-      tcUrl: "https://mph2.myprohelper.com/Terms"
+//      tcUrl: "https://mph2.myprohelper.com/Terms"  // this works on mph2 the correct way.
+      // https://myprohelper.com/Terms this works on myprohelper the correct way.
+      
+      //for localhost: alias /alta/static/terms_policy.pdf;
+      // file:///C:/myprohelper/static/terms_policy.pdf
+      tcUrl: "../../static/terms_policy.pdf"
     }
   },
   directives: { tooltip: tooltip },
@@ -150,7 +155,8 @@ export default {
 if (host_name = "localhost")
   {
     this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
-    this.tcUrl = "http:"+"//"+host_name+"/Terms";
+    this.tcUrl = "http:"+"//"+host_name+"/Terms";  // not working here KLB
+    this.tcUrl = "localhost:5173/terms_policy.pdf"; // working here KLB
   }
   else
   {
@@ -158,9 +164,9 @@ if (host_name = "localhost")
     this.tcUrl = protocol+"//"+host_name+"/Terms";
   }
 
-//   this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";  // to run on local
-// this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy"; // to run on myprohelper server
-//    this.tcUrl = "http:"+"//"+host_name+"/Terms";
+//   this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";  // to run on local, works now
+// this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy"; // to run on myprohelper server works now
+//    this.tcUrl = "http:"+"//"+host_name+"/Terms";  //not working yet, displays bottom of page, 
   },
   mounted() {
     this.vueOnScroll()
