@@ -155,8 +155,8 @@ export default {
 if (host_name = "localhost")
   {
     this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
-    this.tcUrl = "http:"+"//"+host_name+"/Terms";  // not working here KLB
-    this.tcUrl = "localhost:5173/terms_policy.pdf"; // working here KLB
+    //this.tcUrl = "http:"+"//"+host_name+"/Terms";  // not working here KLB
+    this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
   }
   else
   {
@@ -166,7 +166,8 @@ if (host_name = "localhost")
 
 //   this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";  // to run on local, works now
 // this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy"; // to run on myprohelper server works now
-//    this.tcUrl = "http:"+"//"+host_name+"/Terms";  //not working yet, displays bottom of page, 
+//        this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB 
+// this.tcUrl = protocol+"//"+host_name+"/Terms"; working on myprohelper.com
   },
   mounted() {
     this.vueOnScroll()
