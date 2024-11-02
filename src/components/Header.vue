@@ -129,7 +129,7 @@ export default {
 
     let protocol = window.location.protocol;
     let host_name = window.location.hostname;
-    let api_name = window.location.api_name;
+    let api_name = api;
     let port = window.location.port;
 
     this.maineLoginUrl = protocol+"//"+host_name+"/login";  
@@ -138,13 +138,15 @@ export default {
     // in the appsettings.json and has the port and ends with /
     if(port != ""){
     //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
-          this.privacyUrl = api_name+"PrivacyPolicy";
+      //    this.privacyUrl = api+"PrivacyPolicy";
     }
     else{
     //  this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
-        this.privacyUrl = api_name+"PrivacyPolicy";
+       // this.privacyUrl = api+"PrivacyPolicy";
     }
-    this.tcUrl = "protocol"+"//"+host_name+"/Terms";
+    // this.privacyUrl already has the correct one to use on the web site, 
+    // but needs which hostname.
+    this.tcUrl = protocol+"//"+host_name+"/Terms";
   },
   mounted() {
     this.vueOnScroll()
