@@ -97,8 +97,9 @@ export default {
       modal: null,
       maineLoginUrl : "https://myprohelper.com/login",
      // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
-      privacyUrl: "https://myprohelper.com/Privacy",
-      //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works
+      privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
+//      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
+      //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works but old way with pdf
       tcUrl: "https://mph2.myprohelper.com/Terms"
     }
   },
@@ -145,8 +146,21 @@ export default {
     //}
     // KLB this.privacyUrl should get from api in appsettings.json
     // and it will have the correct hostname where it is running.
-    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
+//    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
+if (host_name = "localhost")
+  {
+    this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
+    this.tcUrl = "http:"+"//"+host_name+"/Terms";
+  }
+  else
+  {
+    this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
     this.tcUrl = protocol+"//"+host_name+"/Terms";
+  }
+
+//   this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";  // to run on local
+// this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy"; // to run on myprohelper server
+//    this.tcUrl = "http:"+"//"+host_name+"/Terms";
   },
   mounted() {
     this.vueOnScroll()
