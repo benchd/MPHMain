@@ -108,7 +108,7 @@
               <img src="@/assets/img/pricing-free.png" class="img-fluid" alt="">
               <ul>
                 <li>No installation required</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li>Runs on with iOS and Android Phones</li>
               </ul>
@@ -124,7 +124,7 @@
               <img src="@/assets/img/pricing-starter.png" class="img-fluid" alt="">
               <ul>
                 <li>No Long-term commitment</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li>Runs on iOS and Android Phones</li>
               </ul>
@@ -139,7 +139,7 @@
               <img src="@/assets/img/pricing-business.png" class="img-fluid" alt="">
               <ul>
                 <li>Most economical plan</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>                
                 <li>Runs on iOS and Android Phones</li>
               </ul>

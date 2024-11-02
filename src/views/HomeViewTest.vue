@@ -107,7 +107,7 @@
               <img src="@/assets/img/pricing-free.png" class="img-fluid" alt="">
               <ul>
                 <li>No installation required</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
                 <li class="na">Runs on IOS and Android Phones</li>
@@ -124,7 +124,7 @@
               <img src="@/assets/img/pricing-starter.png" class="img-fluid" alt="">
               <ul>
                 <li>No installation required</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
                 <li class="na">Runs on IOS and Android Phones</li>
@@ -140,7 +140,7 @@
               <img src="@/assets/img/pricing-business.png" class="img-fluid" alt="">
               <ul>
                 <li>No installation required</li>
-                <li>90 day free trial</li>
+                <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
                 <li class="na">Runs on IOS and Android Phones</li>
