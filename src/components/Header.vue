@@ -96,7 +96,9 @@ export default {
       navbar_mobile: false,
       modal: null,
       maineLoginUrl : "https://myprohelper.com/login",
-      privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy",
+     // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy",
+      privacyUrl: "https://myprohelper.com:5005/api/Privacy",
+      //privacyUrl: "https://mph2.myprohelper.com/Privacy",
       tcUrl: "https://mph2.myprohelper.com/Terms"
     }
   },
