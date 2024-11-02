@@ -9,8 +9,10 @@
             <a href="index.html" class="logo d-flex align-items-center">
               <img src="@/assets/img/logo.png" alt="">
             </a>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta
-              donna mare fermentum iaculis eu non diam phasellus.</p>
+            <p>The Help You Need From A Pro You Can Trust
+As an HVAC contractor, you need tools that will empower your teams to work smarter, without working harder. MyProHelper is the all-in-one field management software solution that will transform the way you do business, so that you can focus more time on what matters most.
+Get Started Today
+</p>
             <div class="social-links mt-3" v-if="socialIcon">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -38,8 +40,8 @@
             <h4>Contact Us</h4>
             <p>
               P.O. Box 112<br>
-              Piney Flats,<br> TN 37686-0112 <br><br>
-              <strong>Phone:</strong> 844 376 0001<br>
+              Piney Flats, TN 37686 <br><br>
+              <strong>Phone:</strong> (844) 376-0001<br>
             </p>
           </div>
         </div>
@@ -48,7 +50,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>MyProHelper</span></strong>. All Rights Reserved
+        &copy; Copyright 2023 <strong><span>MyProHelper</span></strong>. All Rights Reserved
       </div>
     </div>
   </footer><!-- End Footer -->

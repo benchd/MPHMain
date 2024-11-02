@@ -27,7 +27,7 @@
               <div class="info-box">
                 <i class="bi bi-geo-alt"></i>
                 <h3>Address</h3>
-                <p>P.O. Box 112 Piney Flats,<br>TN 37686-0112</p>
+                <p>P.O. Box 112 Piney Flats,<br>TN 37686</p>
               </div>
             </div>
             <div class="col-md-6">
