@@ -152,7 +152,7 @@ export default {
     // KLB this.privacyUrl should get from api in appsettings.json
     // and it will have the correct hostname where it is running.
 //    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
-if (baseURI = "http://localhost:5173/")
+if (window.location.origin == "http://localhost:5173")
   {
     this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
     this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
