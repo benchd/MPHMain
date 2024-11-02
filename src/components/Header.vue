@@ -105,7 +105,7 @@ export default {
       
       //for localhost: alias /alta/static/terms_policy.pdf;
       // file:///C:/myprohelper/static/terms_policy.pdf
-      tcUrl: "../../static/terms_policy.pdf"
+      tcUrl: "terms_policy.pdf"
     }
   },
   directives: { tooltip: tooltip },
@@ -152,10 +152,9 @@ export default {
     // KLB this.privacyUrl should get from api in appsettings.json
     // and it will have the correct hostname where it is running.
 //    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
-if (host_name = "localhost")
+if (baseURI = "http://localhost:5173/")
   {
     this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
-    //this.tcUrl = "http:"+"//"+host_name+"/Terms";  // not working here KLB
     this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
   }
   else
