@@ -154,12 +154,14 @@ export default {
 //    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
 if (window.location.origin == "http://localhost:5173")
   {
+    //this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
     this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
-    this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
+    this.tcUrl = window.location.origin+"/terms_policy.pdf"; // working here KLB
   }
   else
   {
-    this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
+    //this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
+    this.privacyUrl = window.location.origin+ "/api/Privacypolicy";
     this.tcUrl = protocol+"//"+host_name+"/Terms";
   }
 
