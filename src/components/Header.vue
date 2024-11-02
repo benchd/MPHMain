@@ -96,7 +96,7 @@ export default {
       navbar_mobile: false,
       modal: null,
       maineLoginUrl : "https://myprohelper.com/login",
-      privacyUrl: "https://myprohelper.com:5005/api/privacypolicy",
+      privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy",
       tcUrl: "https://mph2.myprohelper.com/Terms"
     }
   },
@@ -129,23 +129,21 @@ export default {
 
     let protocol = window.location.protocol;
     let host_name = window.location.hostname;
-    let api_name = api;
     let port = window.location.port;
 
     this.maineLoginUrl = protocol+"//"+host_name+"/login";  
     
-    // This if statement is no longer needed as the api name is 
+    // KLB This if statement is no longer needed as the api name is 
     // in the appsettings.json and has the port and ends with /
-    //if(port != ""){
+//    if(port != ""){
     //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
-      //    this.privacyUrl = api+"PrivacyPolicy";
     //}
     //else{
     //  this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
-       // this.privacyUrl = api+"PrivacyPolicy";
-   // }
-    // this.privacyUrl already has the correct one to use on the web site, 
-    // but needs which hostname.
+    //}
+    // KLB this.privacyUrl should get from api in appsettings.json
+    // and it will have the correct hostname where it is running.
+    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
     this.tcUrl = protocol+"//"+host_name+"/Terms";
   },
   mounted() {
