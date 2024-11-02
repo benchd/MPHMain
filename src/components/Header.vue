@@ -43,7 +43,7 @@
             In order to start your Free Trial for <b>MyProHelper</b>, please contact us at:
           </p>
           <p style="color: #09426a; font-size: 17px; font-weight: bold;" class="text-center"><i class="bi bi-telephone-fill"></i> (844) 376-0001</p>
-          <p class=""><h5 class="text-center text-success">Thank you for your business.</h5></p>
+          <h5><p class=""> class="text-center text-success">Thank you for your business.</p></h5>
 
 
           <!-- <form method="post" class="php-email-form bg-transparent p-0">
@@ -136,14 +136,14 @@ export default {
     
     // This if statement is no longer needed as the api name is 
     // in the appsettings.json and has the port and ends with /
-    if(port != ""){
+    //if(port != ""){
     //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
       //    this.privacyUrl = api+"PrivacyPolicy";
-    }
-    else{
+    //}
+    //else{
     //  this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
        // this.privacyUrl = api+"PrivacyPolicy";
-    }
+   // }
     // this.privacyUrl already has the correct one to use on the web site, 
     // but needs which hostname.
     this.tcUrl = protocol+"//"+host_name+"/Terms";
