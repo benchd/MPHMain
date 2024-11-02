@@ -110,7 +110,7 @@
                 <li>No installation required</li>
                 <li>60 day free trial</li>
                 <li>Free Customer Support</li>
-                <li>Runs on with iOS and Android Phones</li>
+                <li>Runs on with iOS and Android Phones  and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -126,7 +126,7 @@
                 <li>No Long-term commitment</li>
                 <li>60 day free trial</li>
                 <li>Free Customer Support</li>
-                <li>Runs on iOS and Android Phones</li>
+                <li>Runs on iOS and Android Phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -141,7 +141,7 @@
                 <li>Most economical plan</li>
                 <li>60 day free trial</li>
                 <li>Free Customer Support</li>                
-                <li>Runs on iOS and Android Phones</li>
+                <li>Runs on iOS and Android Phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
