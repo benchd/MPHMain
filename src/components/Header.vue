@@ -129,16 +129,20 @@ export default {
 
     let protocol = window.location.protocol;
     let host_name = window.location.hostname;
+    let api_name = window.location.api_name;
     let port = window.location.port;
 
-    this.maineLoginUrl = protocol+"//"+host_name+"/login";    
+    this.maineLoginUrl = protocol+"//"+host_name+"/login";  
+    
+    // This if statement is no longer needed as the api name is 
+    // in the appsettings.json and has the port and ends with /
     if(port != ""){
     //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
-          this.privacyUrl = protocol+"//"+host_name+":"+port+"/api/PrivacyPolicy";
+          this.privacyUrl = protocol+"//"+api_name+"PrivacyPolicy";
     }
     else{
     //  this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
-        this.privacyUrl = protocol+"//"+host_name+"/api/PrivacyPolicy";
+        this.privacyUrl = protocol+"//"+api_name+"PrivacyPolicy";
     }
     this.tcUrl = protocol+"//"+host_name+"/Terms";
   },
