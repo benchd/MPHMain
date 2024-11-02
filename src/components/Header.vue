@@ -133,10 +133,12 @@ export default {
 
     this.maineLoginUrl = protocol+"//"+host_name+"/login";    
     if(port != ""){
-      this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`;
+    //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
+          this.privacyUrl = protocol+"//"+host_name+":"+port+"/api/PrivacyPolicy";
     }
     else{
-      this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
+    //  this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
+        this.privacyUrl = protocol+"//"+host_name+"/api/PrivacyPolicy";
     }
     this.tcUrl = protocol+"//"+host_name+"/Terms";
   },
