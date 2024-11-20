@@ -43,7 +43,7 @@
             In order to start your Free Trial for <b>MyProHelper</b>, please contact us at:
           </p>
           <p style="color: #09426a; font-size: 17px; font-weight: bold;" class="text-center"><i class="bi bi-telephone-fill"></i> (844) 376-0001</p>
-          <h5><p class=""> class="text-center text-success">Thank you for your business.</p></h5>
+          <h5><p class="text-center text-success">Thank you for your business.</p></h5>
 
 
           <!-- <form method="post" class="php-email-form bg-transparent p-0">
