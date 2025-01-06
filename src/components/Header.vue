@@ -15,13 +15,15 @@
           <!-- <a class="nav-link scrollto active" href="/">Home</a></li> -->
           <!-- <li><a class="nav-link scrollto" :to="about">About Us</a></li> -->
           <!-- <li><a class="nav-link scrollto" href="/features">Features</a></li> -->
-          <li><a class="nav-link scrollto" target="_blank"  v-bind:href="tcUrl">Terms & Condition</a>
+          <li><a class="nav-link scrollto" target="_blank" v-bind:href="tcUrl">Terms & Condition</a>
           </li>
-          <li><a class="nav-link scrollto" target="_blank"  v-bind:href="privacyUrl">Privacy Policy</a>
+          <li><a class="nav-link scrollto" target="_blank" v-bind:href="privacyUrl">Privacy Policy</a>
           </li>
           <li><a class="start_free scrollto" href="javascript://" @click="modal.show()">Start Free Trial</a>
           </li>
-          <li><a class="getstarted scrollto ms-0 signin" v-tooltip title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" target="_blank" href="https://myprohelper.com/login">Login</a></li>
+          <li><a class="getstarted scrollto ms-0 signin" v-tooltip
+              title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription"
+              target="_blank" href="https://myprohelper.com/login">Login</a></li>
         </ul>
         <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
       </nav>
@@ -39,14 +41,17 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body contact">
-          <p class="" style="margin-bottom: 0;">
+          <!-- <p class="" style="margin-bottom: 0;">
             In order to start your Free Trial for <b>MyProHelper</b>, please contact us at:
           </p>
-          <p style="color: #09426a; font-size: 17px; font-weight: bold;" class="text-center"><i class="bi bi-telephone-fill"></i> (844) 376-0001</p>
-          <h5><p class="text-center text-success">Thank you for your business.</p></h5>
+          <p style="color: #09426a; font-size: 17px; font-weight: bold;" class="text-center"><i
+              class="bi bi-telephone-fill"></i> (844) 376-0001</p>
+          <h5>
+            <p class="text-center text-success">Thank you for your business.</p>
+          </h5> -->
 
 
-          <!-- <form method="post" class="php-email-form bg-transparent p-0">
+          <form method="post" class="php-email-form bg-transparent p-0">
             <div class="row gy-4">
 
               <div class="col-12">
@@ -64,11 +69,11 @@
               <div class="col-12 ">
                 <input type="number" class="form-control" name="number" placeholder="Phone Number" required="">
               </div>
-<! -- Karen added 
+<!-- Karen added  -->
               <div class="col-12 ">
-                <input type="MainPhone" class="form-control" name="MainPhone" placeholder="Company main Phone Number" required="">
+                <input type="MainPhone" class="form-control" name="MainPhone" placeholder="Company Main Phone Number" required="">
               </div>
-<! -- Karen added 
+<!-- Karen added   -->
               <div class="col-12 ">
                 <input type="MainEmail" class="form-control" name="MainEmail" placeholder="Company Main Email" required="">
               </div>
@@ -78,7 +83,7 @@
               </div>
 
             </div>
-          </form> -->
+          </form>
         </div>
       </div>
     </div>
