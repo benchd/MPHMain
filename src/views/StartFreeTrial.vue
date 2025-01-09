@@ -1,5 +1,5 @@
 <template>
-      <div class="breadcrumb_img breadcrumbs">
+      <!-- <div class="breadcrumb_img breadcrumbs">
             <div class="container">
                   <div class="row">
                         <div class="col-12">
@@ -15,28 +15,37 @@
                         </div>
                   </div>
             </div>
-      </div>
+      </div> -->
       <section class="feature_content">
             <div class="container">
-                  <div class="row">
+                  <!-- <div class="row">
                         <div class="col-12">
                               <header class="section-header">
                                     <h2>Start Free Trial</h2>
                                     <h6>Unlock limitless possibilities with our free trial! Dive into a world of premium features and exclusive content, risk-free. Experience firsthand how our platform revolutionizes your workflow, whether it's boosting productivity, enhancing creativity, or simplifying tasks. With no strings attached, explore all the tools and resources tailored to your needs. Discover why thousands trust us for their success. Start your free trial today and embark on a journey towards unparalleled efficiency and innovation. Don't miss out on this opportunity to elevate your endeavors to new heights. Join us and let's shape the future together!</h6>
                               </header>
                         </div>
-                  </div>
-                  <div class="row justify-content-center position-relative">
+                  </div> -->
+                  <div class="row justify-content-center position-relative p-2">
+                        <div class="col-lg-6">
+                              <header class="section-header">
+                                    <h2>Start Free Trial</h2>
+                                    <h6>Unlock limitless possibilities with our free trial! Dive into a world of premium features and exclusive content, risk-free. Experience firsthand how our platform revolutionizes your workflow, whether it's boosting productivity, enhancing creativity, or simplifying tasks. With no strings attached, explore all the tools and resources tailored to your needs. Discover why thousands trust us for their success. Start your free trial today and embark on a journey towards unparalleled efficiency and innovation. Don't miss out on this opportunity to elevate your endeavors to new heights. Join us and let's shape the future together!</h6>
+                              </header>
+                        </div>
                         <div class="col-lg-6" v-if="!state.otp_section">
                               <form name="frm-contact" @submit.prevent="onUserSubmit" method="post"
                                     class="php-email-form free_form">
                                     <div class="row gy-4">
 
                                           <div class="col-md-6">
-                                                <input type="text" name="CompanyName" class="form-control"
+                                                <label class="form-control">
+                                                      {{ state.CompanyName }}
+                                                </label>
+                                                <!-- <input type="text" name="CompanyName" class="form-control"
                                                       autocomplete="off"
                                                       :class="{ 'is-invalid': v$.CompanyName.$error }"
-                                                      placeholder="Company Name" v-model="state.CompanyName">
+                                                      placeholder="Company Name" v-model=""> -->
                                           </div>
 
                                           <div class="col-md-6">
@@ -71,14 +80,7 @@
                                                       placeholder="Zip" v-model="state.CompanyZip">
                                           </div>
 
-                                          <div class="col-md-6 ">
-                                                <input type="text" maxlength="16" class="form-control"
-                                                      name="CompanyPhone" autocomplete="off" v-maska
-                                                      data-maska="###-###-####"
-                                                      :class="{ 'is-invalid': v$.CompanyPhone.$error }"
-                                                      placeholder="Phone Number" v-model="state.CompanyPhone">
-                                          </div>
-
+                                          
                                           <div class="col-md-6">
                                                 <input type="text" name="FirstName" class="form-control"
                                                       autocomplete="off" :class="{ 'is-invalid': v$.FirstName.$error }"
@@ -89,6 +91,22 @@
                                                 <input type="text" name="LastName" class="form-control"
                                                       autocomplete="off" :class="{ 'is-invalid': v$.LastName.$error }"
                                                       placeholder="Last Name" v-model="state.LastName">
+                                          </div>                                          
+
+                                          <div class="col-md-6 ">
+                                                <input type="text" maxlength="16" class="form-control"
+                                                      name="PhoneNumber" autocomplete="off" v-maska
+                                                      data-maska="###-###-####"
+                                                      :class="{ 'is-invalid': v$.PhoneNumber.$error }"
+                                                      placeholder="Phone Number" v-model="state.PhoneNumber">
+                                          </div>
+
+                                          <div class="col-md-6 ">
+                                                <input type="text" maxlength="16" class="form-control"
+                                                      name="CompanyPhone" autocomplete="off" v-maska
+                                                      data-maska="###-###-####"
+                                                      :class="{ 'is-invalid': v$.CompanyPhone.$error }"
+                                                      placeholder="Company Phone Number" v-model="state.CompanyPhone">
                                           </div>
 
                                           <div class="col-md-6 ">
@@ -96,6 +114,12 @@
                                                       autocomplete="off"
                                                       :class="{ 'is-invalid': v$.EmailAddress.$error }"
                                                       placeholder="Your Email" v-model="state.EmailAddress">
+                                          </div>
+
+                                          <div class="col-md-6 ">
+                                                <input type="text" class="form-control" name="Website"
+                                                      autocomplete="off"                                                     
+                                                      placeholder="Website" v-model="state.Website">
                                           </div>
 
                                           <div class="col-md-12 text-center">
@@ -180,9 +204,11 @@ export default {
                   CompanyState: CustDetail.CompanyState || "",
                   CompanyZip: CustDetail.CompanyZip || "",
                   CompanyPhone: CustDetail.CompanyPhone || "",
+                  PhoneNumber: CustDetail.PhoneNumber || "",
                   FirstName: CustDetail.FirstName || "",
                   LastName: CustDetail.LastName || "",
                   EmailAddress: CustDetail.EmailAddress || "",
+                  Website: CustDetail.Website || "",
                   res_msg: "",
                   otp_section: false,
                   isError: false,
@@ -197,13 +223,15 @@ export default {
                   })
 
             const rules = computed(() => {
+                  // CompanyName: { required },
                   return {
-                        CompanyName: { required },
+                        
                         CompanyAddress: { required },
                         CompanyCity: { required },
                         CompanyState: { required },
                         CompanyZip: { required },
                         CompanyPhone: { required, maxLength: maxLength(16) },
+                        PhoneNumber: { required, maxLength: maxLength(16) },
                         FirstName: { required },
                         LastName: { required },
                         EmailAddress: { required, email: email },
@@ -246,9 +274,11 @@ export default {
                         body_params.CompanyState = this.state.CompanyState;
                         body_params.CompanyZip = this.state.CompanyZip;
                         body_params.CompanyPhone = this.state.CompanyPhone;
+                        body_params.PhoneNumber = this.state.PhoneNumber;
                         body_params.FirstName = this.state.FirstName;
                         body_params.LastName = this.state.LastName;
                         body_params.emailAddress = this.state.EmailAddress;
+                        body_params.Website = this.state.Website;
 
                         this.state.submitted = true
                         const that = this
@@ -273,9 +303,11 @@ export default {
                               that.state.CompanyState = "";
                               that.state.CompanyZip = "";
                               that.state.CompanyPhone = "";
+                              that.state.PhoneNumber = "";
                               that.state.FirstName = "";
                               that.state.LastName = "";
                               // that.state.EmailAddress = "";
+                              that.state.Website = "";
                               that.state.submitted = false
                               if (response.status == 200) {
                                     that.state.otp_section = true
@@ -328,6 +360,27 @@ export default {
 </script>
 
 <style>
+#header
+{
+      /* border-bottom: 1px solid #f1f1f1; */
+}
+.section-header
+{
+      text-align: left !important;
+}
+.feature_content
+{
+      padding-top: 110px;
+}
+.section-header h2
+{
+      font-size: 20px !important;
+      margin: 10px 0 5px 0 !important;
+}
+.section-header h6
+{
+      text-align: justify;
+}
 .breadcrumb_img {
       margin-top: 85px;
       background-image: url('@/assets/img/about.jpg');
@@ -382,5 +435,15 @@ export default {
             font-size: 15px !important;
             line-height: 22px !important;
       }
+}
+.section-header h2
+{
+      font-size: 22px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    margin-top: 15px;
 }
 </style>
