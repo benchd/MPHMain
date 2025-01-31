@@ -30,7 +30,15 @@
                         <div class="col-lg-6">
                               <header class="section-header">
                                     <h2>Start Free Trial</h2>
-                                    <h6>Unlock limitless possibilities with our free trial! Dive into a world of premium features and exclusive content, risk-free. Experience firsthand how our platform revolutionizes your workflow, whether it's boosting productivity, enhancing creativity, or simplifying tasks. With no strings attached, explore all the tools and resources tailored to your needs. Discover why thousands trust us for their success. Start your free trial today and embark on a journey towards unparalleled efficiency and innovation. Don't miss out on this opportunity to elevate your endeavors to new heights. Join us and let's shape the future together!</h6>
+                                    <h6>Unlock limitless possibilities with our free trial! Dive into a world of premium
+                                          features and exclusive content, risk-free. Experience firsthand how our
+                                          platform revolutionizes your workflow, whether it's boosting productivity,
+                                          enhancing creativity, or simplifying tasks. With no strings attached, explore
+                                          all the tools and resources tailored to your needs. Discover why thousands
+                                          trust us for their success. Start your free trial today and embark on a
+                                          journey towards unparalleled efficiency and innovation. Don't miss out on this
+                                          opportunity to elevate your endeavors to new heights. Join us and let's shape
+                                          the future together!</h6>
                               </header>
                         </div>
                         <div class="col-lg-6" v-if="!state.otp_section">
@@ -80,7 +88,7 @@
                                                       placeholder="Zip" v-model="state.CompanyZip">
                                           </div>
 
-                                          
+
                                           <div class="col-md-6">
                                                 <input type="text" name="FirstName" class="form-control"
                                                       autocomplete="off" :class="{ 'is-invalid': v$.FirstName.$error }"
@@ -91,7 +99,7 @@
                                                 <input type="text" name="LastName" class="form-control"
                                                       autocomplete="off" :class="{ 'is-invalid': v$.LastName.$error }"
                                                       placeholder="Last Name" v-model="state.LastName">
-                                          </div>                                          
+                                          </div>
 
                                           <div class="col-md-6 ">
                                                 <input type="text" maxlength="16" class="form-control"
@@ -118,8 +126,7 @@
 
                                           <div class="col-md-6 ">
                                                 <input type="text" class="form-control" name="Website"
-                                                      autocomplete="off"                                                     
-                                                      placeholder="Website" v-model="state.Website">
+                                                      autocomplete="off" placeholder="Website" v-model="state.Website">
                                           </div>
 
                                           <div class="col-md-12 text-center">
@@ -212,7 +219,7 @@ export default {
                   res_msg: "",
                   otp_section: false,
                   isError: false,
-                  submitted:false
+                  submitted: false
 
             })
 
@@ -225,7 +232,7 @@ export default {
             const rules = computed(() => {
                   // CompanyName: { required },
                   return {
-                        
+
                         CompanyAddress: { required },
                         CompanyCity: { required },
                         CompanyState: { required },
@@ -282,7 +289,7 @@ export default {
 
                         this.state.submitted = true
                         const that = this
-                        
+
                         axios.get('/ValidateEmailAddress', {
                               params: body_params,
                               headers: {
@@ -296,19 +303,18 @@ export default {
                               that.v$.$reset();
 
                               that.state.submitted = false;
-                              that.state.CompanyName = "";
-                              that.state.CompanyAddress = "";
-                              that.state.CompanyAddress2 = "";
-                              that.state.CompanyCity = "";
-                              that.state.CompanyState = "";
-                              that.state.CompanyZip = "";
-                              that.state.CompanyPhone = "";
-                              that.state.PhoneNumber = "";
-                              that.state.FirstName = "";
-                              that.state.LastName = "";
+                              // that.state.CompanyName = "";
+                              // that.state.CompanyAddress = "";
+                              // that.state.CompanyAddress2 = "";
+                              // that.state.CompanyCity = "";
+                              // that.state.CompanyState = "";
+                              // that.state.CompanyZip = "";
+                              // that.state.CompanyPhone = "";
+                              // that.state.PhoneNumber = "";
+                              // that.state.FirstName = "";
+                              // that.state.LastName = "";
                               // that.state.EmailAddress = "";
-                              that.state.Website = "";
-                              that.state.submitted = false
+                              // that.state.Website = "";
                               if (response.status == 200) {
                                     that.state.otp_section = true
                               }
@@ -339,13 +345,45 @@ export default {
                         }
                         ).then(response => {
                               if (response.status == 200) {
-                                    that.o$.$reset();
-                                    $cookies.remove('MPHQR1');
-                                    this.otpState.otpSubmitted = false;
-                                    that.state.EmailAddress = "";
-                                    that.state.isError = false;
-                                    that.state.otp_section = false;
-                                    that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you sortly..!";
+
+                                    let body_params = {}
+                                    body_params.CompanyName = this.state.CompanyName;
+                                    body_params.CompanyAddress = this.state.CompanyAddress;
+                                    body_params.CompanyAddress2 = this.state.CompanyAddress2;
+                                    body_params.CompanyCity = this.state.CompanyCity;
+                                    body_params.CompanyState = this.state.CompanyState;
+                                    body_params.CompanyZip = this.state.CompanyZip;
+                                    body_params.CompanyPhone = this.state.CompanyPhone;
+                                    body_params.PhoneNumber = this.state.PhoneNumber;
+                                    body_params.FirstName = this.state.FirstName;
+                                    body_params.LastName = this.state.LastName;
+                                    body_params.emailAddress = this.state.EmailAddress;
+                                    body_params.Website = this.state.Website;
+
+                                    // New POST request
+                                    const guid = $cookies.get('guid');
+                                    axios.post(`/StartTrial?g=${guid}`, body_params, {
+                                          headers: {
+                                                'Content-Type': 'application/json',
+                                                'Access-Control-Allow-Origin': '*',
+                                                'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
+                                                // Add other headers if needed
+                                          },
+                                    }).then(postResponse => {
+                                          if (postResponse.status == 200) {
+                                                // Handle post response if that.o$.$reset();
+                                                $cookies.remove('MPHQR1');
+                                                $cookies.remove('guid');
+                                                this.otpState.otpSubmitted = false;
+                                                that.state.EmailAddress = "";
+                                                that.state.isError = false;
+                                                that.state.otp_section = false;
+                                                that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you sortly..!";
+                                          }
+                                    }).catch(postError => {
+                                          // Handle post error if needed
+                                    });
+
                               }
 
                         })
@@ -360,27 +398,27 @@ export default {
 </script>
 
 <style>
-#header
-{
+#header {
       /* border-bottom: 1px solid #f1f1f1; */
 }
-.section-header
-{
+
+.section-header {
       text-align: left !important;
 }
-.feature_content
-{
+
+.feature_content {
       padding-top: 110px;
 }
-.section-header h2
-{
+
+.section-header h2 {
       font-size: 20px !important;
       margin: 10px 0 5px 0 !important;
 }
-.section-header h6
-{
+
+.section-header h6 {
       text-align: justify;
 }
+
 .breadcrumb_img {
       margin-top: 85px;
       background-image: url('@/assets/img/about.jpg');
@@ -395,7 +433,7 @@ export default {
 .free_form {
       color: #696969;
       background: #fafbff;
-      padding: 30px ;
+      padding: 30px;
       margin-bottom: 20px;
 }
 
@@ -421,29 +459,27 @@ export default {
       box-shadow: none;
 }
 
-.notification_part
-{
+.notification_part {
       width: 49%;
-    margin: 10px auto;
-    padding: 8px !important;
+      margin: 10px auto;
+      padding: 8px !important;
 }
-@media(max-width:991px)
-{
-      .notification_part
-      {
+
+@media(max-width:991px) {
+      .notification_part {
             width: 100%;
             font-size: 15px !important;
             line-height: 22px !important;
       }
 }
-.section-header h2
-{
+
+.section-header h2 {
       font-size: 22px;
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin: 0;
-    color: var(--color-secondary);
-    text-transform: uppercase;
-    margin-top: 15px;
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--color-secondary);
+      text-transform: uppercase;
+      margin-top: 15px;
 }
 </style>

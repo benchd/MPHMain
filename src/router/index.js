@@ -12,6 +12,14 @@ async function getParams(to) {
   }
 }
 
+async function getGuid(to) {
+  const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (to.query.g && guidRegex.test(to.query.g)) {
+    $cookies.set("guid", to.query.g);
+    return { path: to.path, query: {}, hash: to.hash };
+  }  
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior: function (to, from, savedPosition) {
@@ -23,6 +31,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
+      beforeEnter: getGuid,
       component: HomeView,
     },
     {
