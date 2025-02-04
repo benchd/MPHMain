@@ -313,7 +313,7 @@ export default {
                                     that.state.EmailAddress = "";
                                     that.state.isError = false;
                                     that.state.otp_section = false;
-                                    that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you sortly..!";
+                                    that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you shortly..!";
                               }
 
                         })
