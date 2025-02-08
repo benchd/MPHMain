@@ -21,9 +21,9 @@
           </li>
           <li><a class="start_free scrollto" href="javascript://" @click="handleStartFreeTrial">Start Free Trial</a>
           </li>
+            <!-- KLB  target="_blank" href="https://myprohelper.com/login">Login</a></li>  -->
           <li><a class="getstarted scrollto ms-0 signin" v-tooltip
               title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription"
-            <!-- KLB  target="_blank" href="https://myprohelper.com/login">Login</a></li>  -->
               target="_blank" href="http://localhost:5173/login">Login</a></li>
         </ul>
         <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
