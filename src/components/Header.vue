@@ -102,14 +102,9 @@ export default {
     return {
       navbar_mobile: false,
       modal: null,
-<<<<<<< HEAD
       maineLoginUrl : "http://localhost:5173/login",
 //klb      maineLoginUrl : "https://myprohelper.com/login",
      // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
-=======
-      maineLoginUrl: "https://myprohelper.com/login",
-      // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
->>>>>>> 1099b76d058b4b6a4a0db32b380eaf1065e93362
       privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
       //      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
       //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works but old way with pdf
