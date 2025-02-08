@@ -15,14 +15,16 @@
           <!-- <a class="nav-link scrollto active" href="/">Home</a></li> -->
           <!-- <li><a class="nav-link scrollto" :to="about">About Us</a></li> -->
           <!-- <li><a class="nav-link scrollto" href="/features">Features</a></li> -->
-          <li><a class="nav-link scrollto" target="_blank"  v-bind:href="tcUrl">Terms & Condition</a>
+          <li><a class="nav-link scrollto" target="_blank" v-bind:href="tcUrl">Terms & Condition</a>
           </li>
-          <li><a class="nav-link scrollto" target="_blank"  v-bind:href="privacyUrl">Privacy Policy</a>
+          <li><a class="nav-link scrollto" target="_blank" v-bind:href="privacyUrl">Privacy Policy</a>
           </li>
-          <li><a class="start_free scrollto" href="javascript://" @click="modal.show()">Start Free Trial</a>
+          <li><a class="start_free scrollto" href="javascript://" @click="handleStartFreeTrial">Start Free Trial</a>
           </li>
-<!--         <li><a class="getstarted scrollto ms-0 signin" v-tooltip title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" target="_blank" href="https://myprohelper.com/login">Login</a></li> -->
-         <li><a class="getstarted scrollto ms-0 signin" v-tooltip title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" target="_blank" href="http://localhost:5173/login">Login</a></li> 
+          <li><a class="getstarted scrollto ms-0 signin" v-tooltip
+              title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription"
+            <!-- KLB  target="_blank" href="https://myprohelper.com/login">Login</a></li>  -->
+              target="_blank" href="http://localhost:5173/login">Login</a></li>
         </ul>
         <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
       </nav>
@@ -43,8 +45,11 @@
           <p class="" style="margin-bottom: 0;">
             In order to start your Free Trial for <b>MyProHelper</b>, please contact us at:
           </p>
-          <p style="color: #09426a; font-size: 17px; font-weight: bold;" class="text-center"><i class="bi bi-telephone-fill"></i> (844) 376-0001</p>
-          <h5><p class="text-center text-success">Thank you for your business.</p></h5>
+          <p style="color: #09426a; font-size: 17px; font-weight: bold;" class="text-center"><i
+              class="bi bi-telephone-fill"></i> (844) 376-0001</p>
+          <h5>
+            <p class="text-center text-success">Thank you for your business.</p>
+          </h5>
 
 
           <!-- <form method="post" class="php-email-form bg-transparent p-0">
@@ -65,11 +70,10 @@
               <div class="col-12 ">
                 <input type="number" class="form-control" name="number" placeholder="Phone Number" required="">
               </div>
-<! -- Karen added 
+
               <div class="col-12 ">
-                <input type="MainPhone" class="form-control" name="MainPhone" placeholder="Company main Phone Number" required="">
+                <input type="MainPhone" class="form-control" name="MainPhone" placeholder="Company Main Phone Number" required="">
               </div>
-<! -- Karen added 
               <div class="col-12 ">
                 <input type="MainEmail" class="form-control" name="MainEmail" placeholder="Company Main Email" required="">
               </div>
@@ -89,6 +93,8 @@
 <script>
 
 import { tooltip } from './Tooltip';
+import { useRouter } from 'vue-router';
+import axios from 'axios'
 
 export default {
   name: 'Header',
@@ -96,15 +102,20 @@ export default {
     return {
       navbar_mobile: false,
       modal: null,
+<<<<<<< HEAD
       maineLoginUrl : "http://localhost:5173/login",
 //klb      maineLoginUrl : "https://myprohelper.com/login",
      // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
+=======
+      maineLoginUrl: "https://myprohelper.com/login",
+      // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
+>>>>>>> 1099b76d058b4b6a4a0db32b380eaf1065e93362
       privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
-//      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
+      //      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
       //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works but old way with pdf
-//      tcUrl: "https://mph2.myprohelper.com/Terms"  // this works on mph2 the correct way.
+      //      tcUrl: "https://mph2.myprohelper.com/Terms"  // this works on mph2 the correct way.
       // https://myprohelper.com/Terms this works on myprohelper the correct way.
-      
+
       //for localhost: alias /alta/static/terms_policy.pdf;
       // file:///C:/myprohelper/static/terms_policy.pdf
       tcUrl: "terms_policy.pdf"
@@ -134,18 +145,43 @@ export default {
         }
       });
     },
+    async handleStartFreeTrial() {
+      const guid = this.$cookies.get('guid');
+      const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+      if (guid && guidRegex.test(guid)) {
+        try {
+          const response = await axios.get(`/api/LookupGuid?guid=${guid}`);
+          if (response.status === 200) {
+            this.$cookies.set('MPHQR1', response.data);
+            this.$router.push({ name: 'customer_detail' });
+          } else {
+            this.showModal();
+          }
+        } catch (error) {
+          console.error('Error looking up GUID:', error);
+          // this.showModal();
+          this.$router.push({ name: 'customer_detail' });
+        }
+      } else {
+        this.showModal();
+      }
+    },
+    showModal() {
+      this.modal.show()
+    }
   },
-  beforeMount(){
+  beforeMount() {
 
     let protocol = window.location.protocol;
     let host_name = window.location.hostname;
     let port = window.location.port;
 
-    this.maineLoginUrl = protocol+"//"+host_name+"/login";  
-    
+    this.maineLoginUrl = protocol + "//" + host_name + "/login";
+
     // KLB This if statement is no longer needed as the api name is 
     // in the appsettings.json and has the port and ends with /
-//    if(port != ""){
+    //    if(port != ""){
     //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
     //}
     //else{
@@ -153,23 +189,21 @@ export default {
     //}
     // KLB this.privacyUrl should get from api in appsettings.json
     // and it will have the correct hostname where it is running.
-//    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
-if (window.location.origin == "http://localhost:5173")
-  {
-    //this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
-    this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
-    this.tcUrl = window.location.origin+"/terms_policy.pdf"; // working here KLB
-  }
-  else
-  {
-    this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
-    this.tcUrl = protocol+"//"+host_name+"/Terms";
-  }
+    //    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
+    if (window.location.origin == "http://localhost:5173") {
+      //this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
+      this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
+      this.tcUrl = window.location.origin + "/terms_policy.pdf"; // working here KLB
+    }
+    else {
+      this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
+      this.tcUrl = protocol + "//" + host_name + "/Terms";
+    }
 
-//   this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";  // to run on local, works now
-// this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy"; // to run on myprohelper server works now
-//        this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB 
-// this.tcUrl = protocol+"//"+host_name+"/Terms"; working on myprohelper.com
+    //   this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";  // to run on local, works now
+    // this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy"; // to run on myprohelper server works now
+    //        this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB 
+    // this.tcUrl = protocol+"//"+host_name+"/Terms"; working on myprohelper.com
   },
   mounted() {
     this.vueOnScroll()
