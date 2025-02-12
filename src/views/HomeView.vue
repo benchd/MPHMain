@@ -181,20 +181,7 @@
                 </div>
               </div>
             </swiper-slide>
-            <swiper-slide>
-              <div class="testimonial-item">
-
-                <p>
-                  This helped me to track what I have paid for the parts and what we charged for them on invoices. 
-                  So I can make sure that my markup is reasonable and covering my costs.
-                </p>
-                <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                  <h3>Frank P.</h3>
-                  <h4></h4>
-                </div>
-              </div>
-            </swiper-slide>
+            
             <swiper-slide>
               <div class="testimonial-item">
 
@@ -226,12 +213,26 @@
               <div class="testimonial-item">
 
                 <p>
+                  This helped me to track what I have paid for the parts and what we charged for them on invoices. 
+                  So I can make sure that my markup is reasonable and covering my costs.
+                </p>
+                <div class="profile mt-auto">
+                  <img src="@/assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                  <h3>Frank P.</h3>
+                  <h4></h4>
+                </div>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="testimonial-item">
+
+                <p>
                   We can collect payment for jobs faster by letting them pay using a credit card 
                   while we are there. A lot easier and quicker than a check that has to be deposited 
                   and then wait on it to clear, or maybe bounce.
                 </p>
                 <div class="profile mt-auto">
-                  <img src="@/assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                  <img src="@/assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
                   <h3>Mack E.</h3>
                   <h4></h4>
                 </div>
