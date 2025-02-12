@@ -1,54 +1,61 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-import Features from '../views/Features.vue'
-import ContactView from '../views/ContactView.vue'
-import StartFreeTrial from '../views/StartFreeTrial.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+import AboutView from "../views/AboutView.vue";
+import Features from "../views/Features.vue";
+import ContactView from "../views/ContactView.vue";
+import StartFreeTrial from "../views/StartFreeTrial.vue";
 
-async function getParams(to) {  
-  if (Object.keys(to.query).length){
-      console.log(to.query);
-      $cookies.set('MPHQR1',to.query)
-    return { path: to.path, query: {}, hash: to.hash }
+async function getParams(to) {
+  if (Object.keys(to.query).length) {    
+    $cookies.set("MPHQR1", to.query);
+    return { path: to.path, query: {}, hash: to.hash };
   }
+}
+
+async function getGuid(to) {
+  const guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (to.query.g && guidRegex.test(to.query.g)) {
+    $cookies.set("guid", to.query.g);
+    return { path: to.path, query: {}, hash: to.hash };
+  }  
 }
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  scrollBehavior: function(to, from, savedPosition) {
+  scrollBehavior: function (to, from, savedPosition) {
     // always scroll to top
-    return { top: 0 }
-    
+    return { top: 0 };
   },
   linkActiveClass: "active",
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: "/",
+      name: "home",
+      beforeEnter: getGuid,
+      component: HomeView,
     },
     {
-      path: '/about',
-      name: 'about',      
-      component: AboutView
+      path: "/about",
+      name: "about",
+      component: AboutView,
     },
     {
-      path: '/features',
-      name: 'features',      
-      component: Features
+      path: "/features",
+      name: "features",
+      component: Features,
     },
     {
-      path: '/contact',
-      name: 'contact',      
-      component: ContactView
+      path: "/contact",
+      name: "contact",
+      component: ContactView,
     },
     {
-      path: '/customer-detail',
-      name: 'customer_detail',      
+      path: "/customer-detail",
+      name: "customer_detail",
       beforeEnter: getParams,
-      component: StartFreeTrial
-    }
-  ]
-})
+      component: StartFreeTrial,
+    },
+  ],
+});
 
-export default router
+export default router;
