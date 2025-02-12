@@ -1,5 +1,5 @@
-open sftp://alta@mph387.myprohelper.com/ -hostkey="E2b9Fcoa2PDSLBLRiLDblkP9ZI+rGsPrbdwlvY7m2fw" -privatekey="c:\MyProHelper\keys\david-private.ppk" -passphrase="bigsky"
+open sftp://alta@mph387.myprohelper.com/ -hostkey="E2b9Fcoa2PDSLBLRiLDblkP9ZI+rGsPrbdwlvY7m2fw" -privatekey="c:\MyProHelper\keys\harsh" -passphrase="mphbeer"
 lcd dist
 cd /alta/MPHMain/staging
-synchronize remote -filemask=*.*;*/|appsettings.json -delete
+synchronize remote
 

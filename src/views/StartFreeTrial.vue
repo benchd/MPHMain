@@ -345,45 +345,13 @@ export default {
                         }
                         ).then(response => {
                               if (response.status == 200) {
-
-                                    let body_params = {}
-                                    body_params.CompanyName = this.state.CompanyName;
-                                    body_params.CompanyAddress = this.state.CompanyAddress;
-                                    body_params.CompanyAddress2 = this.state.CompanyAddress2;
-                                    body_params.CompanyCity = this.state.CompanyCity;
-                                    body_params.CompanyState = this.state.CompanyState;
-                                    body_params.CompanyZip = this.state.CompanyZip;
-                                    body_params.CompanyPhone = this.state.CompanyPhone;
-                                    body_params.PhoneNumber = this.state.PhoneNumber;
-                                    body_params.FirstName = this.state.FirstName;
-                                    body_params.LastName = this.state.LastName;
-                                    body_params.emailAddress = this.state.EmailAddress;
-                                    body_params.Website = this.state.Website;
-
-                                    // New POST request
-                                    const guid = $cookies.get('guid');
-                                    axios.post(`/StartTrial?g=${guid}`, body_params, {
-                                          headers: {
-                                                'Content-Type': 'application/json',
-                                                'Access-Control-Allow-Origin': '*',
-                                                'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
-                                                // Add other headers if needed
-                                          },
-                                    }).then(postResponse => {
-                                          if (postResponse.status == 200) {
-                                                // Handle post response if that.o$.$reset();
-                                                $cookies.remove('MPHQR1');
-                                                $cookies.remove('guid');
-                                                this.otpState.otpSubmitted = false;
-                                                that.state.EmailAddress = "";
-                                                that.state.isError = false;
-                                                that.state.otp_section = false;
-                                                that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you sortly..!";
-                                          }
-                                    }).catch(postError => {
-                                          // Handle post error if needed
-                                    });
-
+                                    that.o$.$reset();
+                                    $cookies.remove('MPHQR1');
+                                    this.otpState.otpSubmitted = false;
+                                    that.state.EmailAddress = "";
+                                    that.state.isError = false;
+                                    that.state.otp_section = false;
+                                    that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you shortly..!";
                               }
 
                         })

@@ -21,9 +21,10 @@
           </li>
           <li><a class="start_free scrollto" href="javascript://" @click="handleStartFreeTrial">Start Free Trial</a>
           </li>
+            <!-- KLB  target="_blank" href="https://myprohelper.com/login">Login</a></li>  -->
           <li><a class="getstarted scrollto ms-0 signin" v-tooltip
-              title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription"
-              target="_blank" href="https://myprohelper.com/login">Login</a></li>
+              title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" 
+              target="_blank" href="http://localhost:8080/login">Login</a></li>
         </ul>
         <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
       </nav>
@@ -101,8 +102,9 @@ export default {
     return {
       navbar_mobile: false,
       modal: null,
-      maineLoginUrl: "https://myprohelper.com/login",
-      // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
+      maineLoginUrl : "http://localhost:8080/login",
+//klb      maineLoginUrl : "https://myprohelper.com/login",
+     // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
       privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
       //      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
       //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works but old way with pdf

@@ -110,7 +110,7 @@
                 <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
-                <li class="na">Runs on IOS and Android Phones and tablets</li>
+                <li class="na">Runs on iOS and Android phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -127,7 +127,7 @@
                 <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
-                <li class="na">Runs on IOS and Android Phones and tablets</li>
+                <li class="na">Runs on iOS and Android phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
@@ -143,7 +143,7 @@
                 <li>60 day free trial</li>
                 <li>Free Customer Support</li>
                 <li class="na">Works on all devices</li>
-                <li class="na">Runs on IOS and Android Phones and tablets</li>
+                <li class="na">Runs on iOS and Android phones and tablets</li>
               </ul>
               <!--  <a href="#" class="btn-buy">Buy Now</a> -->
             </div>
