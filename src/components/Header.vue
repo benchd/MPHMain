@@ -102,10 +102,10 @@ export default {
     return {
       navbar_mobile: false,
       modal: null,
-      maineLoginUrl : "http://localhost:8080/login",
-//klb      maineLoginUrl : "https://myprohelper.com/login",
-     // privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
-      privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
+//      maineLoginUrl : "http://localhost:8080/login",
+      maineLoginUrl : "https://myprohelper.com/login",
+     privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
+  //    privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
       //      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
       //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works but old way with pdf
       //      tcUrl: "https://mph2.myprohelper.com/Terms"  // this works on mph2 the correct way.
