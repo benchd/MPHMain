@@ -11,12 +11,14 @@ import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './assets/css/style.css'
+import { appSettings } from './plugins/appsettings';
 
-axios.defaults.baseURL = "http://localhost:5020/api"
+axios.defaults.baseURL = appSettings.MainBEUrl;
+console.log("appsettings :: ",appSettings)
 
 const app = createApp(App)
 
 app.use(router)
 app.use(VueCookies)
-// app.use(Maska)
+app.provide("appSettings",appSettings)
 app.mount('#app')
