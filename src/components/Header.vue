@@ -21,11 +21,11 @@
           </li>
           <li><a class="start_free scrollto" href="javascript://" @click="handleStartFreeTrial">Start Free Trial</a>
           </li>
-            <!-- KLB  target="_blank" href="https://myprohelper.com/login">Login</a></li>  -->
-            <!-- target="_blank" href="http://localhost:8080/login">Login</a></li>   -->
-            <li><a class="getstarted scrollto ms-0 signin" v-tooltip
-              title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription" 
-              target="_blank" href="https://myprohelper.com/login">Login</a></li>
+          <!-- KLB  target="_blank" href="https://myprohelper.com/login">Login</a></li>  -->
+          <!-- target="_blank" href="http://localhost:8080/login">Login</a></li>   -->
+          <li><a class="getstarted scrollto ms-0 signin" v-tooltip
+              title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription"
+              target="_blank" :href="loginUrl">Login</a></li>
         </ul>
         <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
       </nav>
@@ -96,24 +96,20 @@
 import { tooltip } from './Tooltip';
 import { useRouter } from 'vue-router';
 import axios from 'axios'
+import { inject } from 'vue';
+
+
+// import appSettings from '@/appsettings.json'; // Import the appsettings.json
 
 export default {
   name: 'Header',
+  inject: ['appSettings'],
   data() {
     return {
       navbar_mobile: false,
       modal: null,
-//      maineLoginUrl : "http://localhost:8080/login",
-      maineLoginUrl : "https://myprohelper.com/login",
-     privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
-  //    privacyUrl: "http://localhost:5011/api/PrivacyPolicy",
-      //      privacyUrl: "https://myprohelper.com:5005/api/Privacypolicy",
-      //privacyUrl: "https://mph2.myprohelper.com/Privacy", //klb this works but old way with pdf
-      //      tcUrl: "https://mph2.myprohelper.com/Terms"  // this works on mph2 the correct way.
-      // https://myprohelper.com/Terms this works on myprohelper the correct way.
-
-      //for localhost: alias /alta/static/terms_policy.pdf;
-      // file:///C:/myprohelper/static/terms_policy.pdf
+      loginUrl: "https://myprohelper.com/login",
+      privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
       tcUrl: "terms_policy.pdf"
     }
   },
@@ -168,38 +164,9 @@ export default {
     }
   },
   beforeMount() {
-
-    let protocol = window.location.protocol;
-    let host_name = window.location.hostname;
-    let port = window.location.port;
-
-    this.maineLoginUrl = protocol + "//" + host_name + "/login";
-
-    // KLB This if statement is no longer needed as the api name is 
-    // in the appsettings.json and has the port and ends with /
-    //    if(port != ""){
-    //  this.privacyUrl = `${protocol}//${host_name}:${port}/api/privacypolicy`; 
-    //}
-    //else{
-    //  this.privacyUrl = `${protocol}//${host_name}/api/privacypolicy`;
-    //}
-    // KLB this.privacyUrl should get from api in appsettings.json
-    // and it will have the correct hostname where it is running.
-    //    this.privacyUrl = protocol+"//"+host_name+":5011"+"/api/PrivacyPolicy";
-    if (window.location.origin == "http://localhost:5173") {
-      //this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB
-      this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";
-      this.tcUrl = window.location.origin + "/terms_policy.pdf"; // working here KLB
-    }
-    else {
-      this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy";
-      this.tcUrl = protocol + "//" + host_name + "/Terms";
-    }
-
-    //   this.privacyUrl = "http://localhost:5011/api/PrivacyPolicy";  // to run on local, works now
-    // this.privacyUrl = "https://myprohelper.com:5005/api/Privacypolicy"; // to run on myprohelper server works now
-    //        this.tcUrl = "http:"+"//"+"localhost:5173/terms_policy.pdf"; // working here KLB 
-    // this.tcUrl = protocol+"//"+host_name+"/Terms"; working on myprohelper.com
+    this.loginUrl = this.appSettings.LoginUrl;
+    this.tcUrl = this.appSettings.TermCondtionUrl;
+    this.privacyUrl = this.appSettings.PrivacyUrl;   
   },
   mounted() {
     this.vueOnScroll()
