@@ -12,12 +12,9 @@ window.bootstrap = bootstrap;
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './assets/css/style.css'
 import { appSettings } from './plugins/appsettings';
-
 axios.defaults.baseURL = appSettings.MainBEUrl;
-console.log("appsettings :: ",appSettings)
 
 const app = createApp(App)
-
 app.use(router)
 app.use(VueCookies)
 app.provide("appSettings",appSettings)

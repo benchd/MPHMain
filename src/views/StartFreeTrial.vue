@@ -47,13 +47,13 @@
                                     <div class="row gy-4">
 
                                           <div class="col-md-6">
-                                                <label class="form-control">
+                                                <label class="form-control" v-if="state.CompanyName != ''">
                                                       {{ state.CompanyName }}
                                                 </label>
-                                                <!-- <input type="text" name="CompanyName" class="form-control"
-                                                      autocomplete="off"
+                                                <input type="text" name="CompanyName" class="form-control"
+                                                      autocomplete="off" v-if="state.CompanyName == ''"
                                                       :class="{ 'is-invalid': v$.CompanyName.$error }"
-                                                      placeholder="Company Name" v-model=""> -->
+                                                      placeholder="Company Name" v-model="state.CompanyName">
                                           </div>
 
                                           <div class="col-md-6">
@@ -262,12 +262,10 @@ export default {
                   o$
             }
       },
-
       directives: { maska: vMaska },
-
       methods: {
             onUserSubmit() {
-
+                  
                   this.v$.$validate();
 
                   if (!this.v$.$error) {
@@ -345,48 +343,58 @@ export default {
                         }
                         ).then(response => {
                               if (response.status == 200) {
-                                    let body_params = {}
-                                    body_params.CompanyName = this.state.CompanyName;
-                                    body_params.CompanyAddress = this.state.CompanyAddress;
-                                    body_params.CompanyAddress2 = this.state.CompanyAddress2;
-                                    body_params.CompanyCity = this.state.CompanyCity;
-                                    body_params.CompanyState = this.state.CompanyState;
-                                    body_params.CompanyZip = this.state.CompanyZip;
-                                    body_params.CompanyPhone = this.state.CompanyPhone;
-                                    body_params.PhoneNumber = this.state.PhoneNumber;
-                                    body_params.FirstName = this.state.FirstName;
-                                    body_params.LastName = this.state.LastName;
-                                    body_params.emailAddress = this.state.EmailAddress;
-                                    body_params.Website = this.state.Website;
-
-                                    // New POST request
-                                    const guid = $cookies.get('guid');
-                                    axios.post(`/StartTrial?g=${guid}`, body_params, {
-                                          headers: {
-                                                'Content-Type': 'application/json',
-                                                'Access-Control-Allow-Origin': '*',
-                                                'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
-                                                // Add other headers if needed
-                                          },
-                                    }).then(postResponse => {
-                                          if (postResponse.status == 200) {
-                                                // Handle post response if that.o$.$reset();
-                                                $cookies.remove('MPHQR1');
-                                                $cookies.remove('guid');
-                                                this.otpState.otpSubmitted = false;
-                                                that.state.EmailAddress = "";
-                                                that.state.isError = false;
-                                                that.state.otp_section = false;
-                                                that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you sortly..!";
-                                          }
-                                    }).catch(postError => {
-                                          // Handle post error if needed
-                                    });
+                                    that.callStartTrial()
                               }
-
                         })
                   }
+            },
+            callStartTrial() {
+                  // New POST request
+                  const guid = $cookies.get('guid');
+                  const that = this
+                  let body_params = {}
+                  body_params.Guid = guid;
+                  body_params.CompanyName = this.state.CompanyName;
+                  body_params.CompanyAddress = this.state.CompanyAddress;
+                  body_params.CompanyAddress2 = this.state.CompanyAddress2;
+                  body_params.CompanyCity = this.state.CompanyCity;
+                  body_params.CompanyState = this.state.CompanyState;
+                  body_params.CompanyZip = this.state.CompanyZip;
+                  body_params.CompanyPhone = this.state.CompanyPhone;
+                  body_params.PhoneNumber = this.state.PhoneNumber;
+                  body_params.FirstName = this.state.FirstName;
+                  body_params.LastName = this.state.LastName;
+                  body_params.EmailAddress = this.state.EmailAddress;
+                  body_params.Website = this.state.Website;
+                  body_params.CurTime = new Date().getTime();
 
+
+                  axios.get(`/StartTrial`, { params: body_params }, {
+                        headers: {
+                              'Content-Type': 'application/json',
+                              'Access-Control-Allow-Origin': '*',
+                              'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
+                              // Add other headers if needed
+                        },
+                  }).then(postResponse => {
+                        if (postResponse.status == 200) {
+                              // Handle post response if that.o$.$reset();
+                              $cookies.remove('MPHQR1');
+                              $cookies.remove('guid');
+                              that.otpState.otpSubmitted = false;
+                              that.state.EmailAddress = "";
+                              that.state.isError = false;
+                              that.state.otp_section = false;
+                              that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you sortly..!";
+                        }
+                  }).catch(postError => {                        
+                        alert(postError.response.status+" "+postError.response.statusText);
+                        that.otpState.otpSubmitted = false;                        
+                        that.state.isError = false;
+                        that.state.otp_section = false;
+                        that.state.submitted = false;
+
+                  });
             },
             mounted() {
 
@@ -396,9 +404,6 @@ export default {
 </script>
 
 <style>
-#header {
-      /* border-bottom: 1px solid #f1f1f1; */
-}
 
 .section-header {
       text-align: left !important;
