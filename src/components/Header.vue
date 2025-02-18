@@ -144,15 +144,30 @@ export default {
       if (guid && guidRegex.test(guid)) {
         try {
           const response = await axios.get(`StartTrial/LookupGuid?Guid=${guid}`);
+          console.log("response :: ", response)
           if (response.status === 200) {
-            this.$cookies.set('MPHQR1', response.data);
+            let coookie_data = {};
+            coookie_data.CompanyName = response.data.Name;
+            coookie_data.CompanyAddress = response.data.Address;
+            coookie_data.CompanyAddress2 = "";
+            coookie_data.CompanyCity = response.data.City;
+            coookie_data.CompanyState = response.data.State;
+            coookie_data.CompanyZip = response.data.ZipCode;
+            coookie_data.CompanyPhone = response.data.PhoneNumber;
+            coookie_data.PhoneNumber = "";
+            coookie_data.FirstName = "";
+            coookie_data.LastName = "";
+            coookie_data.EmailAddress = "";
+            coookie_data.Website = coookie_data.Website;
+
+            this.$cookies.set('MPHQR1', coookie_data);
             this.$router.push({ name: 'customer_detail' });
           } else {
             this.showModal();
           }
         } catch (error) {
           console.error('Error looking up GUID:', error);
-          this.showModal();            
+          this.showModal();
         }
       } else {
         this.showModal();
@@ -165,7 +180,7 @@ export default {
   beforeMount() {
     this.loginUrl = this.appSettings.LoginUrl;
     this.tcUrl = this.appSettings.TermCondtionUrl;
-    this.privacyUrl = this.appSettings.PrivacyUrl;   
+    this.privacyUrl = this.appSettings.PrivacyUrl;
   },
   mounted() {
     this.vueOnScroll()
