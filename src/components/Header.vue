@@ -143,7 +143,7 @@ export default {
 
       if (guid && guidRegex.test(guid)) {
         try {
-          const response = await axios.get(`/LookupGuid?guid=${guid}`);
+          const response = await axios.get(`StartTrial/LookupGuid?Guid=${guid}`);
           if (response.status === 200) {
             this.$cookies.set('MPHQR1', response.data);
             this.$router.push({ name: 'customer_detail' });
