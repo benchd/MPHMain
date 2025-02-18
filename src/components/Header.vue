@@ -152,8 +152,7 @@ export default {
           }
         } catch (error) {
           console.error('Error looking up GUID:', error);
-          this.showModal();
-          // this.$router.push({ name: 'customer_detail' });
+          this.showModal();            
         }
       } else {
         this.showModal();
