@@ -1,2 +1,2 @@
-ps -A | grep -E 'MPH|LogWatcher'
-
+#!/bin/bash
+ps -A |grep --color=always -E 'MPH|LogWatcher|QRLanding|MainBE'
