@@ -1,5 +1,5 @@
 <template>
-  <header id="header" class="header fixed-top" ref="headRef">
+  <header id="header" class="header fixed-top bg-white" ref="headRef">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <a href="/" class="logo d-flex align-items-center">
@@ -130,7 +130,7 @@ export default {
       });
 
       window.addEventListener("scroll", () => {
-        if (window.scrollY > 20) {
+        if (window.scrollY > 1) {
           selectHeader.classList.add('header-scrolled')
         } else {
           selectHeader.classList.remove('header-scrolled')
@@ -152,8 +152,8 @@ export default {
           }
         } catch (error) {
           console.error('Error looking up GUID:', error);
-          // this.showModal();
-          this.$router.push({ name: 'customer_detail' });
+          this.showModal();
+          // this.$router.push({ name: 'customer_detail' });
         }
       } else {
         this.showModal();
