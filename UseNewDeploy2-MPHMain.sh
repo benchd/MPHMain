@@ -10,4 +10,5 @@ shopt -u extglob
 cd ..
 cp /alta/Utils/ShowRunning.sh .
 chmod +x ./*.sh
+#chmod +x ./index.html
 ./ShowRunning.sh
