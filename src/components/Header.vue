@@ -144,7 +144,7 @@ export default {
       if (guid && guidRegex.test(guid)) {
         try {
           const response = await axios.get(`StartTrial/LookupGuid?Guid=${guid}`);
-          console.log("response :: ", response)
+          
           if (response.status === 200) {
             let coookie_data = {};
             coookie_data.CompanyName = response.data.Name;
