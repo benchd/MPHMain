@@ -41,54 +41,10 @@
                                           the future together!</h6>
                               </header>
                         </div>
-                        <div class="col-lg-6" v-if="!state.otp_section">
+                        <div class="col-lg-6" v-if="!state.otp_section && !state.phone_section">
                               <form name="frm-contact" @submit.prevent="onUserSubmit" method="post"
                                     class="php-email-form free_form">
                                     <div class="row gy-4">
-
-                                          <div class="col-md-6">
-                                                <label class="form-control" v-if="state.CompanyName != ''">
-                                                      {{ state.CompanyName }}
-                                                </label>
-                                                <input type="text" name="CompanyName" class="form-control"
-                                                      autocomplete="off" v-if="state.CompanyName == ''"
-                                                      :class="{ 'is-invalid': v$.CompanyName.$error }"
-                                                      placeholder="Company Name" v-model="state.CompanyName">
-                                          </div>
-
-                                          <div class="col-md-6">
-                                                <input type="text" name="CompanyAddress" class="form-control"
-                                                      autocomplete="off"
-                                                      :class="{ 'is-invalid': v$.CompanyAddress.$error }"
-                                                      placeholder="Address Line 1" v-model="state.CompanyAddress">
-                                          </div>
-                                          <div class="col-md-6">
-                                                <input type="text" name="CompanyAddress2" class="form-control"
-                                                      autocomplete="off" placeholder="Address Line 2"
-                                                      v-model="state.CompanyAddress2">
-                                          </div>
-
-                                          <div class="col-md-6">
-                                                <input type="text" name="CompanyCity" class="form-control"
-                                                      autocomplete="off"
-                                                      :class="{ 'is-invalid': v$.CompanyCity.$error }"
-                                                      placeholder="City" v-model="state.CompanyCity">
-                                          </div>
-
-                                          <div class="col-md-6">
-                                                <input type="text" name="CompanyState" class="form-control"
-                                                      autocomplete="off"
-                                                      :class="{ 'is-invalid': v$.CompanyState.$error }"
-                                                      placeholder="State" v-model="state.CompanyState">
-                                          </div>
-
-                                          <div class="col-md-6">
-                                                <input type="text" name="CompanyZip" class="form-control"
-                                                      autocomplete="off" :class="{ 'is-invalid': v$.CompanyZip.$error }"
-                                                      placeholder="Zip" v-model="state.CompanyZip">
-                                          </div>
-
-
                                           <div class="col-md-6">
                                                 <input type="text" name="FirstName" class="form-control"
                                                       autocomplete="off" :class="{ 'is-invalid': v$.FirstName.$error }"
@@ -101,36 +57,15 @@
                                                       placeholder="Last Name" v-model="state.LastName">
                                           </div>
 
-                                          <div class="col-md-6 ">
-                                                <input type="text" maxlength="16" class="form-control"
-                                                      name="PhoneNumber" autocomplete="off" v-maska
-                                                      data-maska="###-###-####"
-                                                      :class="{ 'is-invalid': v$.PhoneNumber.$error }"
-                                                      placeholder="Phone Number" v-model="state.PhoneNumber">
-                                          </div>
-
-                                          <div class="col-md-6 ">
-                                                <input type="text" maxlength="16" class="form-control"
-                                                      name="CompanyPhone" autocomplete="off" v-maska
-                                                      data-maska="###-###-####"
-                                                      :class="{ 'is-invalid': v$.CompanyPhone.$error }"
-                                                      placeholder="Company Phone Number" v-model="state.CompanyPhone">
-                                          </div>
-
-                                          <div class="col-md-6 ">
+                                          <div class="col-md-12 ">
                                                 <input type="text" class="form-control" name="EmailAddress"
                                                       autocomplete="off"
                                                       :class="{ 'is-invalid': v$.EmailAddress.$error }"
                                                       placeholder="Your Email" v-model="state.EmailAddress">
                                           </div>
 
-                                          <div class="col-md-6 ">
-                                                <input type="text" class="form-control" name="Website"
-                                                      autocomplete="off" placeholder="Website" v-model="state.Website">
-                                          </div>
-
                                           <div class="col-md-12 text-center">
-                                                <button type="submit" v-if="!state.submitted">Submit</button>
+                                                <button type="submit" v-if="!state.submitted">Start Free Trail</button>
                                                 <div class="spinner-border text-primary" role="status"
                                                       v-if="state.submitted">
                                                       <span class="visually-hidden">Loading...</span>
@@ -166,14 +101,39 @@
                                                       v-if="otpState.otpSubmitted">
                                                       <span class="visually-hidden">Loading...</span>
                                                 </div>
-
                                           </div>
-
                                     </div>
-
-
                               </form>
                         </div>
+
+                        <div class="col-lg-6" v-if="state.phone_section">
+                              <form name="frm-contact" @submit.prevent="onPhoneNumberSubmit" method="post"
+                                    class="php-email-form free_form">
+                                    <div class="row gy-4">
+                                          <div class="col-md-12">
+                                                Your Cell Phone Number
+                                          </div>
+                                          <div class="col-md-12">                                                
+
+                                                <input type="text" maxlength="16" class="form-control"
+                                                    name="phoneNumber" autocomplete="off" v-maska
+                                                    data-maska="(###) ###-####"
+                                                    :class="{ 'is-invalid': pn$.phoneNumber.$error }"
+                                                    placeholder="Phone Number" v-model="phoneState.phoneNumber">      
+                                          </div>
+
+
+                                          <div class="col-md-12 text-center">
+                                                <button type="submit" v-if="!phoneState.phoneSubmitted">Start Free Trial</button>
+                                                <div class="spinner-border text-primary" role="status"
+                                                      v-if="phoneState.phoneSubmitted">
+                                                      <span class="visually-hidden">Loading...</span>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </form>
+                        </div>
+
                         <div class="col-md-12 text-center sweet_notification" v-if="state.res_msg">
                               <Transition>
                                     <div class="alert text-white h5 notification_part"
@@ -198,26 +158,16 @@ import { inject } from "vue";
 export default {
 
       setup() {
-
             const $cookies = inject('$cookies');
+            const appSettings = inject('appSettings');
             let CustDetail = $cookies.get('MPHQR1') || {};
-
-
             const state = reactive({
-                  CompanyName: CustDetail.CompanyName || "",
-                  CompanyAddress: CustDetail.CompanyAddress || "",
-                  CompanyAddress2: CustDetail.CompanyAddress2 || "",
-                  CompanyCity: CustDetail.CompanyCity || "",
-                  CompanyState: CustDetail.CompanyState || "",
-                  CompanyZip: CustDetail.CompanyZip || "",
-                  CompanyPhone: CustDetail.CompanyPhone || "",
-                  PhoneNumber: CustDetail.PhoneNumber || "",
                   FirstName: CustDetail.FirstName || "",
                   LastName: CustDetail.LastName || "",
                   EmailAddress: CustDetail.EmailAddress || "",
-                  Website: CustDetail.Website || "",
                   res_msg: "",
                   otp_section: false,
+                  phone_section: false,
                   isError: false,
                   submitted: false
 
@@ -229,16 +179,15 @@ export default {
                         otpSubmitted: false
                   })
 
+            const phoneState = reactive(
+                  {
+                        phoneNumber: "",
+                        phoneSubmitted: false
+                  })
+
             const rules = computed(() => {
                   // CompanyName: { required },
                   return {
-
-                        CompanyAddress: { required },
-                        CompanyCity: { required },
-                        CompanyState: { required },
-                        CompanyZip: { required },
-                        CompanyPhone: { required, maxLength: maxLength(16) },
-                        PhoneNumber: { required, maxLength: maxLength(16) },
                         FirstName: { required },
                         LastName: { required },
                         EmailAddress: { required, email: email },
@@ -248,18 +197,26 @@ export default {
             const rulesOTP = computed(() => {
                   return {
                         VerifyCode: { required, numeric, minLength: minLength(4) },
-
+                  }
+            })
+            const rulesphoneNumber = computed(() => {
+                  return {                        
+                        phoneNumber: { required, maxLength: maxLength(16) },
                   }
             })
 
             const v$ = useVuelidate(rules, state)
             const o$ = useVuelidate(rulesOTP, otpState)
+            const pn$ = useVuelidate(rulesphoneNumber, phoneState)
 
             return {
+                  appSettings,
                   state,
                   otpState,
+                  phoneState,
                   v$,
-                  o$
+                  o$,
+                  pn$
             }
       },
       directives: { maska: vMaska },
@@ -271,20 +228,9 @@ export default {
                   if (!this.v$.$error) {
 
                         let body_params = {}
-
-                        body_params.CompanyName = this.state.CompanyName;
-                        body_params.CompanyAddress = this.state.CompanyAddress;
-                        body_params.CompanyAddress2 = this.state.CompanyAddress2;
-                        body_params.CompanyCity = this.state.CompanyCity;
-                        body_params.CompanyState = this.state.CompanyState;
-                        body_params.CompanyZip = this.state.CompanyZip;
-                        body_params.CompanyPhone = this.state.CompanyPhone;
-                        body_params.PhoneNumber = this.state.PhoneNumber;
                         body_params.FirstName = this.state.FirstName;
                         body_params.LastName = this.state.LastName;
                         body_params.emailAddress = this.state.EmailAddress;
-                        body_params.Website = this.state.Website;
-
                         this.state.submitted = true
                         const that = this
 
@@ -299,20 +245,7 @@ export default {
                         }
                         ).then(response => {
                               that.v$.$reset();
-
                               that.state.submitted = false;
-                              // that.state.CompanyName = "";
-                              // that.state.CompanyAddress = "";
-                              // that.state.CompanyAddress2 = "";
-                              // that.state.CompanyCity = "";
-                              // that.state.CompanyState = "";
-                              // that.state.CompanyZip = "";
-                              // that.state.CompanyPhone = "";
-                              // that.state.PhoneNumber = "";
-                              // that.state.FirstName = "";
-                              // that.state.LastName = "";
-                              // that.state.EmailAddress = "";
-                              // that.state.Website = "";
                               if (response.status == 200) {
                                     that.state.otp_section = true
                               }
@@ -324,6 +257,7 @@ export default {
                   }
             },
             onOTPSubmit() {
+                 
                   this.o$.$validate();
 
                   if (!this.o$.$error) {
@@ -343,9 +277,18 @@ export default {
                         }
                         ).then(response => {
                               if (response.status == 200) {
-                                    that.callStartTrial()
+                                    that.state.otp_section = false;
+                                    that.state.phone_section = true;
                               }
                         })
+                  }
+            },
+            onPhoneNumberSubmit(){
+                  this.pn$.$validate();
+
+                  if (!this.pn$.$error) {
+                        this.phoneState.phoneSubmitted = true;
+                        this.callStartTrial()
                   }
             },
             callStartTrial() {
@@ -361,7 +304,7 @@ export default {
                   body_params.CompanyState = this.state.CompanyState;
                   body_params.CompanyZip = this.state.CompanyZip;
                   body_params.CompanyPhone = this.state.CompanyPhone;
-                  body_params.PhoneNumber = this.state.PhoneNumber;
+                  body_params.PhoneNumber = this.phoneState.phoneNumber;
                   body_params.FirstName = this.state.FirstName;
                   body_params.LastName = this.state.LastName;
                   body_params.EmailAddress = this.state.EmailAddress;
@@ -369,7 +312,7 @@ export default {
                   body_params.CurTime = new Date().getTime();
 
 
-                  axios.get(`/StartTrial`, { params: body_params }, {
+                  axios.put(`/StartTrial/StartTrial2`, { params: body_params }, {
                         headers: {
                               'Content-Type': 'application/json',
                               'Access-Control-Allow-Origin': '*',
@@ -381,15 +324,16 @@ export default {
                               // Handle post response if that.o$.$reset();
                               $cookies.remove('MPHQR1');
                               $cookies.remove('guid');
-                              that.otpState.otpSubmitted = false;
+                              that.phoneState.phoneSubmitted = false;
                               that.state.EmailAddress = "";
                               that.state.isError = false;
                               that.state.otp_section = false;
-                              that.state.res_msg = "Thanks for showing interest in MyProHelper. Our representive will contact you sortly..!";
+                              that.state.res_msg = "Company has been created and redirecting on your accoung..!";                              
+                              window.location.href = `${this.appSettings.JwtURL}${postResponse.data.token}`
                         }
-                  }).catch(postError => {                        
-                        alert(postError.response.status+" "+postError.response.statusText);
-                        that.otpState.otpSubmitted = false;                        
+                  }).catch(postError => {
+                        alert(postError.response.status + " " + postError.response.statusText);
+                        that.otpState.otpSubmitted = false;
                         that.state.isError = false;
                         that.state.otp_section = false;
                         that.state.submitted = false;
@@ -404,7 +348,6 @@ export default {
 </script>
 
 <style>
-
 .section-header {
       text-align: left !important;
 }
