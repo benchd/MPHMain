@@ -41,107 +41,122 @@
                                           the future together!</h6>
                               </header>
                         </div>
-                        <div class="col-lg-6" v-if="!state.otp_section && !state.phone_section">
-                              <form name="frm-contact" @submit.prevent="onUserSubmit" method="post"
-                                    class="php-email-form free_form">
-                                    <div class="row gy-4">
-                                          <div class="col-md-6">
-                                                <input type="text" name="FirstName" class="form-control"
-                                                      autocomplete="off" :class="{ 'is-invalid': v$.FirstName.$error }"
-                                                      placeholder="First Name" v-model="state.FirstName">
-                                          </div>
+                        <div class="col-lg-6">
+                              <div class="row">
+                                    <div class="col-lg-12" v-if="!state.otp_section && !state.phone_section">
+                                          <form name="frm-contact" @submit.prevent="onUserSubmit" method="post"
+                                                class="php-email-form free_form">
 
-                                          <div class="col-md-6">
-                                                <input type="text" name="LastName" class="form-control"
-                                                      autocomplete="off" :class="{ 'is-invalid': v$.LastName.$error }"
-                                                      placeholder="Last Name" v-model="state.LastName">
-                                          </div>
+                                                <div class="row gy-4">
+                                                      <div class="col-md-12 text-danger">
+                                                            <p style="font-size: 18px; margin: 0;"></p>
+                                                      </div>
+                                                      <div class="col-md-6">
+                                                            <input type="text" name="FirstName" class="form-control"
+                                                                  autocomplete="off"
+                                                                  :class="{ 'is-invalid': v$.FirstName.$error }"
+                                                                  placeholder="First Name" v-model="state.FirstName">
+                                                      </div>
 
-                                          <div class="col-md-12 ">
-                                                <input type="text" class="form-control" name="EmailAddress"
-                                                      autocomplete="off"
-                                                      :class="{ 'is-invalid': v$.EmailAddress.$error }"
-                                                      placeholder="Your Email" v-model="state.EmailAddress">
-                                          </div>
+                                                      <div class="col-md-6">
+                                                            <input type="text" name="LastName" class="form-control"
+                                                                  autocomplete="off"
+                                                                  :class="{ 'is-invalid': v$.LastName.$error }"
+                                                                  placeholder="Last Name" v-model="state.LastName">
+                                                      </div>
 
-                                          <div class="col-md-12 text-center">
-                                                <button type="submit" v-if="!state.submitted">Start Free Trail</button>
-                                                <div class="spinner-border text-primary" role="status"
-                                                      v-if="state.submitted">
-                                                      <span class="visually-hidden">Loading...</span>
+                                                      <div class="col-md-12 ">
+                                                            <input type="text" class="form-control" name="EmailAddress"
+                                                                  autocomplete="off"
+                                                                  :class="{ 'is-invalid': v$.EmailAddress.$error }"
+                                                                  placeholder="Your Email" v-model="state.EmailAddress">
+                                                      </div>
+
+                                                      <div class="col-md-12 text-center">
+                                                            <button type="submit" v-if="!state.submitted">Start Free
+                                                                  Trail</button>
+                                                            <div class="spinner-border text-primary" role="status"
+                                                                  v-if="state.submitted">
+                                                                  <span class="visually-hidden">Loading...</span>
+                                                            </div>
+
+                                                      </div>
+
+
                                                 </div>
-
-                                          </div>
-
+                                          </form>
 
                                     </div>
-                              </form>
 
-                        </div>
-
-                        <div class="col-lg-6" v-if="state.otp_section">
-                              <form name="frm-contact" @submit.prevent="onOTPSubmit" method="post"
-                                    class="php-email-form free_form">
-                                    <div class="row gy-4">
-                                          <div class="col-md-12">
-                                                For email address verification an OTP sent to {{ state.EmailAddress }}.
-                                                Please enter an OTP here.
-                                          </div>
-                                          <div class="col-md-12">
-                                                <input type="text" name="VerifyCode" v-model="otpState.VerifyCode"
-                                                      class="form-control" autocomplete="off" maxlength="4"
-                                                      style="text-align:center;letter-spacing: 15px;"
-                                                      :class="{ 'is-invalid': o$.VerifyCode.$error }">
-                                          </div>
+                                    <div class="col-lg-12" v-if="state.otp_section">
+                                          <form name="frm-contact" @submit.prevent="onOTPSubmit" method="post"
+                                                class="php-email-form free_form">
+                                                <div class="row gy-4">
+                                                      <div class="col-md-12">
+                                                            A verification code has been sent to {{ state.EmailAddress }}. Please enter the code below to verify your email.
+                                                      </div>
+                                                      <div class="col-md-12">
+                                                            <input type="text" name="VerifyCode"
+                                                                  v-model="otpState.VerifyCode" class="form-control"
+                                                                  autocomplete="off" maxlength="4"
+                                                                  style="text-align:center;letter-spacing: 15px;"
+                                                                  :class="{ 'is-invalid': o$.VerifyCode.$error }">
+                                                      </div>
 
 
-                                          <div class="col-md-12 text-center">
-                                                <button type="submit" v-if="!otpState.otpSubmitted">Verify</button>
-                                                <div class="spinner-border text-primary" role="status"
-                                                      v-if="otpState.otpSubmitted">
-                                                      <span class="visually-hidden">Loading...</span>
+                                                      <div class="col-md-12 text-center">
+                                                            <button type="submit"
+                                                                  v-if="!otpState.otpSubmitted">Verify</button>
+                                                            <div class="spinner-border text-primary" role="status"
+                                                                  v-if="otpState.otpSubmitted">
+                                                                  <span class="visually-hidden">Loading...</span>
+                                                            </div>
+                                                      </div>
                                                 </div>
-                                          </div>
+                                          </form>
                                     </div>
-                              </form>
-                        </div>
 
-                        <div class="col-lg-6" v-if="state.phone_section">
-                              <form name="frm-contact" @submit.prevent="onPhoneNumberSubmit" method="post"
-                                    class="php-email-form free_form">
-                                    <div class="row gy-4">
-                                          <div class="col-md-12">
-                                                Your Cell Phone Number
-                                          </div>
-                                          <div class="col-md-12">                                                
+                                    <div class="col-lg-12" v-if="state.phone_section">
+                                          <form name="frm-contact" @submit.prevent="onPhoneNumberSubmit" method="post"
+                                                class="php-email-form free_form">
+                                                <div class="row gy-4">
+                                                      <div class="col-md-12">
+                                                            Your Cell Phone Number
+                                                      </div>
+                                                      <div class="col-md-12">
 
-                                                <input type="text" maxlength="16" class="form-control"
-                                                    name="phoneNumber" autocomplete="off" v-maska
-                                                    data-maska="(###) ###-####"
-                                                    :class="{ 'is-invalid': pn$.phoneNumber.$error }"
-                                                    placeholder="Phone Number" v-model="phoneState.phoneNumber">      
-                                          </div>
+                                                            <input type="text" maxlength="16" class="form-control"
+                                                                  name="phoneNumber" autocomplete="off" v-maska
+                                                                  data-maska="(###) ###-####"
+                                                                  :class="{ 'is-invalid': pn$.phoneNumber.$error }"
+                                                                  placeholder="Phone Number"
+                                                                  v-model="phoneState.phoneNumber">
+                                                      </div>
 
 
-                                          <div class="col-md-12 text-center">
-                                                <button type="submit" v-if="!phoneState.phoneSubmitted">Start Free Trial</button>
-                                                <div class="spinner-border text-primary" role="status"
-                                                      v-if="phoneState.phoneSubmitted">
-                                                      <span class="visually-hidden">Loading...</span>
+                                                      <div class="col-md-12 text-center">
+                                                            <button type="submit"
+                                                                  v-if="!phoneState.phoneSubmitted">Start Free
+                                                                  Trial</button>
+                                                            <div class="spinner-border text-primary" role="status"
+                                                                  v-if="phoneState.phoneSubmitted">
+                                                                  <span class="visually-hidden">Loading...</span>
+                                                            </div>
+                                                      </div>
                                                 </div>
-                                          </div>
+                                          </form>
                                     </div>
-                              </form>
-                        </div>
 
-                        <div class="col-md-12 text-center sweet_notification" v-if="state.res_msg">
-                              <Transition>
-                                    <div class="alert text-white h5 notification_part"
-                                          :class="{ 'alert-danger bg-danger': state.isError, 'alert-success bg-success ': !state.isError }"
-                                          role="alert">
-                                          {{ state.res_msg }}
+                                    <div class="col-md-12 text-center sweet_notification" v-if="state.res_msg">
+                                          <Transition>
+                                                <div class="alert text-white h5 notification_part"
+                                                      :class="{ 'alert-danger bg-danger': state.isError, 'alert-success bg-success ': !state.isError }"
+                                                      role="alert">
+                                                      {{ state.res_msg }}
+                                                </div>
+                                          </Transition>
                                     </div>
-                              </Transition>
+                              </div>
                         </div>
                   </div>
             </div>
@@ -200,7 +215,7 @@ export default {
                   }
             })
             const rulesphoneNumber = computed(() => {
-                  return {                        
+                  return {
                         phoneNumber: { required, maxLength: maxLength(16) },
                   }
             })
@@ -222,7 +237,7 @@ export default {
       directives: { maska: vMaska },
       methods: {
             onUserSubmit() {
-                  
+
                   this.v$.$validate();
 
                   if (!this.v$.$error) {
@@ -257,7 +272,7 @@ export default {
                   }
             },
             onOTPSubmit() {
-                 
+
                   this.o$.$validate();
 
                   if (!this.o$.$error) {
@@ -283,7 +298,7 @@ export default {
                         })
                   }
             },
-            onPhoneNumberSubmit(){
+            onPhoneNumberSubmit() {
                   this.pn$.$validate();
 
                   if (!this.pn$.$error) {
@@ -321,15 +336,24 @@ export default {
                         },
                   }).then(postResponse => {
                         if (postResponse.status == 200) {
-                              // Handle post response if that.o$.$reset();
-                              $cookies.remove('MPHQR1');
-                              $cookies.remove('guid');
-                              that.phoneState.phoneSubmitted = false;
-                              that.state.EmailAddress = "";
-                              that.state.isError = false;
-                              that.state.otp_section = false;
-                              that.state.res_msg = "Company has been created and redirecting on your accoung..!";                              
-                              window.location.href = `${this.appSettings.JwtURL}${postResponse.data.token}`
+
+                              if (postResponse.data.DidCreateNewCompany) {
+                                    // Handle post response if that.o$.$reset();
+                                    $cookies.remove('MPHQR1');
+                                    $cookies.remove('guid');
+                                    that.phoneState.phoneSubmitted = false;
+                                    that.state.EmailAddress = "";
+                                    that.state.isError = false;
+                                    that.state.otp_section = false;
+                                    that.state.res_msg = "Company has been created and connecting to your account..!";
+                                    setTimeout(function () {
+                                          window.location.href = postResponse.data.RedirectURL
+                                    }, 2000);
+                              } else {
+                                    that.state.res_msg = "Your company has not been created. Please contact the admin at (844) 376-0001.";
+                                    that.state.isError = true;
+                                    that.phoneState.phoneSubmitted = false;                                   
+                              }
                         }
                   }).catch(postError => {
                         alert(postError.response.status + " " + postError.response.statusText);
@@ -405,8 +429,7 @@ export default {
       box-shadow: none;
 }
 
-.notification_part {
-      width: 49%;
+.notification_part {      
       margin: 10px auto;
       padding: 8px !important;
 }
