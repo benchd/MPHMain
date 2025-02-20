@@ -311,23 +311,15 @@ export default {
                   const guid = $cookies.get('guid');
                   const that = this
                   let body_params = {}
-                  body_params.Guid = guid;
-                  body_params.CompanyName = this.state.CompanyName;
-                  body_params.CompanyAddress = this.state.CompanyAddress;
-                  body_params.CompanyAddress2 = this.state.CompanyAddress2;
-                  body_params.CompanyCity = this.state.CompanyCity;
-                  body_params.CompanyState = this.state.CompanyState;
-                  body_params.CompanyZip = this.state.CompanyZip;
-                  body_params.CompanyPhone = this.state.CompanyPhone;
+                  body_params.Guid = guid;                  
                   body_params.PhoneNumber = this.phoneState.phoneNumber;
                   body_params.FirstName = this.state.FirstName;
                   body_params.LastName = this.state.LastName;
-                  body_params.EmailAddress = this.state.EmailAddress;
-                  body_params.Website = this.state.Website;
+                  body_params.EmailAddress = this.state.EmailAddress;                  
                   body_params.CurTime = new Date().getTime();
+                  const u = new URLSearchParams(body_params).toString();
 
-
-                  axios.put(`/StartTrial/StartTrial2`, { params: body_params }, {
+                  axios.put(`/StartTrial/StartTrial2?${u}`,{}, {
                         headers: {
                               'Content-Type': 'application/json',
                               'Access-Control-Allow-Origin': '*',
