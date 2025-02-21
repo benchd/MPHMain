@@ -422,7 +422,7 @@ export default {
                                           window.location.href = postResponse.data.RedirectURL
                                     }, 2000);
                               } else {
-                                    that.state.res_msg = "MyProHelper has not finished setting up for 'Air Conditioning Specialist' Please contact MyProHelper, Customer Support at (844) 376-0001.";
+                                    that.state.res_msg = `MyProHelper has not finished setting up for '${that.state.CompanyName}' Please contact MyProHelper, Customer Support at (844) 376-0001.`;
                                     that.state.isError = true;
                                     that.phoneState.phoneSubmitted = false;
                               }
