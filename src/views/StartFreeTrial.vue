@@ -265,9 +265,7 @@ export default {
                   }, 1000);
             };
 
-            const changeEmailAddress = () => {
-                  state.otp_section = false;
-            };
+           
 
             return {
                   appSettings,
@@ -276,9 +274,7 @@ export default {
                   phoneState,
                   v$,
                   o$,
-                  pn$,
-                  resendEmail,
-                  changeEmailAddress
+                  pn$
             }
       },
       directives: { maska: vMaska },
@@ -443,7 +439,7 @@ export default {
                   }
             },
             changeEmailAddress() {
-                  state.otp_section = false;
+                  this.state.otp_section = false;
             },
             resendEmailTimer() {
                   this.otpState.timer = 30;
