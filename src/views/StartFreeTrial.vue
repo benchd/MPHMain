@@ -44,7 +44,7 @@
                         <div class="col-lg-6">
                               <div class="row">
                                     <div class="col-lg-12" v-if="!state.otp_section && !state.phone_section">
-                                          <form name="frm-contact" @submit.prevent="onUserSubmit" method="post"
+                                          <form name="frm-contact" @submit.prevent="onUserSubmit(true)" method="post"
                                                 class="php-email-form free_form">
 
                                                 <div class="row gy-4">
@@ -53,7 +53,7 @@
                                                       </div>
                                                       <div class="col-md-6">
                                                             <input type="text" name="FirstName" class="form-control"
-                                                                  autocomplete="off"
+                                                                  autocomplete="off" ref="inpFirstName" autofocus
                                                                   :class="{ 'is-invalid': v$.FirstName.$error }"
                                                                   placeholder="First Name" v-model="state.FirstName">
                                                       </div>
@@ -93,20 +93,35 @@
                                                 class="php-email-form free_form">
                                                 <div class="row gy-4">
                                                       <div class="col-md-12">
-                                                            A verification code has been sent to {{ state.EmailAddress }}. Please enter the code below to verify your email.
+                                                            A verification code has been sent to {{ state.EmailAddress
+                                                            }}. Please enter the code below to verify your email.
                                                       </div>
                                                       <div class="col-md-12">
                                                             <input type="text" name="VerifyCode"
                                                                   v-model="otpState.VerifyCode" class="form-control"
-                                                                  autocomplete="off" maxlength="4"
+                                                                  autocomplete="off" maxlength="4" autofocus
                                                                   style="text-align:center;letter-spacing: 15px;"
-                                                                  :class="{ 'is-invalid': o$.VerifyCode.$error }">
+                                                                  :class="{ 'is-invalid': o$.VerifyCode.$error }"
+                                                                  ref="verifyCodeInput">
                                                       </div>
 
 
                                                       <div class="col-md-12 text-center">
                                                             <button type="submit"
                                                                   v-if="!otpState.otpSubmitted">Verify</button>
+                                                            <br><br>
+
+                                                            <div class="d-flex justify-content-between mt-2">
+                                                                  <a href="javascript://"
+                                                                        @click="changeEmailAddress">Change Email</a>
+                                                                  <a href="javascript://" @click="resendEmail"
+                                                                        :disabled="!otpState.canResendEmail">
+                                                                        Resend Email <span
+                                                                              v-if="!otpState.canResendEmail"> ({{
+                                                                                    otpState.timer }}s)</span>
+                                                                  </a>
+                                                            </div>
+
                                                             <div class="spinner-border text-primary" role="status"
                                                                   v-if="otpState.otpSubmitted">
                                                                   <span class="visually-hidden">Loading...</span>
@@ -127,7 +142,8 @@
 
                                                             <input type="text" maxlength="16" class="form-control"
                                                                   name="phoneNumber" autocomplete="off" v-maska
-                                                                  data-maska="(###) ###-####"
+                                                                  data-maska="(###) ###-####" autofocus
+                                                                  ref="phoneNumberInput"
                                                                   :class="{ 'is-invalid': pn$.phoneNumber.$error }"
                                                                   placeholder="Phone Number"
                                                                   v-model="phoneState.phoneNumber">
@@ -141,7 +157,11 @@
                                                             <div class="spinner-border text-primary" role="status"
                                                                   v-if="phoneState.phoneSubmitted">
                                                                   <span class="visually-hidden">Loading...</span>
-                                                            </div>
+                                                            </div><br>
+                                                            <span v-if="phoneState.phoneSubmitted"
+                                                                  style="font-weight: bold;color: #013289;">Getting
+                                                                  MyProHelper set up for '{{ state.CompanyName
+                                                                  }}'</span>
                                                       </div>
                                                 </div>
                                           </form>
@@ -163,9 +183,10 @@
       </section>
 </template>
 <script>
+
 import useVuelidate from '@vuelidate/core'
 import { required, email, maxLength, minLength, numeric } from '@vuelidate/validators'
-import { reactive, computed } from 'vue'
+import { reactive, computed, ref, nextTick, onMounted } from 'vue'
 import axios from 'axios'
 import { vMaska } from "maska"
 import { inject } from "vue";
@@ -173,13 +194,16 @@ import { inject } from "vue";
 export default {
 
       setup() {
+
             const $cookies = inject('$cookies');
             const appSettings = inject('appSettings');
             let CustDetail = $cookies.get('MPHQR1') || {};
+
             const state = reactive({
                   FirstName: CustDetail.FirstName || "",
                   LastName: CustDetail.LastName || "",
                   EmailAddress: CustDetail.EmailAddress || "",
+                  CompanyName: CustDetail.CompanyName || "",
                   res_msg: "",
                   otp_section: false,
                   phone_section: false,
@@ -188,10 +212,13 @@ export default {
 
             })
 
+
             const otpState = reactive(
                   {
                         VerifyCode: "",
-                        otpSubmitted: false
+                        otpSubmitted: false,
+                        canResendEmail: false,
+                        timer: 30
                   })
 
             const phoneState = reactive(
@@ -224,6 +251,24 @@ export default {
             const o$ = useVuelidate(rulesOTP, otpState)
             const pn$ = useVuelidate(rulesphoneNumber, phoneState)
 
+            const resendEmail = () => {
+                  if (resendEmail)
+                        console.log("Resend email requested");
+                  this.otpState.canResendEmail = false;
+                  otpState.timer = 30;
+                  const interval = setInterval(() => {
+                        otpState.timer--;
+                        if (otpState.timer <= 0) {
+                              otpState.canResendEmail = true;
+                              clearInterval(interval);
+                        }
+                  }, 1000);
+            };
+
+            const changeEmailAddress = () => {
+                  state.otp_section = false;
+            };
+
             return {
                   appSettings,
                   state,
@@ -231,12 +276,14 @@ export default {
                   phoneState,
                   v$,
                   o$,
-                  pn$
+                  pn$,
+                  resendEmail,
+                  changeEmailAddress
             }
       },
       directives: { maska: vMaska },
       methods: {
-            onUserSubmit() {
+            onUserSubmit(inresponse=true) {
 
                   this.v$.$validate();
 
@@ -248,7 +295,9 @@ export default {
                         body_params.emailAddress = this.state.EmailAddress;
                         this.state.submitted = true
                         const that = this
-
+                        if(!inresponse){
+                              this.resendEmailTimer();
+                        }
                         axios.get('/ValidateEmailAddress', {
                               params: body_params,
                               headers: {
@@ -263,12 +312,38 @@ export default {
                               that.state.submitted = false;
                               if (response.status == 200) {
                                     that.state.otp_section = true
+                                    that.otpState.canResendEmail = false;
+                                    that.state.isError = false;
+                                    that.state.res_msg = "";
+
+                                    setTimeout(() => {
+                                          that.otpState.canResendEmail = true;
+                                    }, 30000);
+
+                                    nextTick(() => {
+                                          that.$refs.verifyCodeInput.focus();
+                                    });
+                                    if(inresponse){
+                                          this.resendEmailTimer();
+                                    }
+
                               }
                               else if (response.status == 406) {
-                                    this.state.isError = true;
-                                    this.state.res_msg = "Email address already exist in the system";
+                                    that.state.submitted = false;
+                                    that.state.isError = true;
+                                    that.state.res_msg = "Email address already exist in the system";
                               }
-                        })
+                        }).catch(postError => {
+                              that.state.submitted = false;
+                              that.state.isError = true;
+                              if (postError.response.status == 406) {
+                                    that.state.res_msg = "Email address already exist in the system";
+                              }
+                              else {
+                                    that.state.res_msg = postError.response.statusText;
+                              }
+
+                        });
                   }
             },
             onOTPSubmit() {
@@ -294,6 +369,10 @@ export default {
                               if (response.status == 200) {
                                     that.state.otp_section = false;
                                     that.state.phone_section = true;
+                                    nextTick(() => {
+                                          that.$refs.phoneNumberInput.focus();
+                                    });
+
                               }
                         })
                   }
@@ -311,15 +390,15 @@ export default {
                   const guid = $cookies.get('guid');
                   const that = this
                   let body_params = {}
-                  body_params.Guid = guid;                  
+                  body_params.Guid = guid;
                   body_params.PhoneNumber = this.phoneState.phoneNumber;
                   body_params.FirstName = this.state.FirstName;
                   body_params.LastName = this.state.LastName;
-                  body_params.EmailAddress = this.state.EmailAddress;                  
+                  body_params.EmailAddress = this.state.EmailAddress;
                   body_params.CurTime = new Date().getTime();
                   const u = new URLSearchParams(body_params).toString();
 
-                  axios.put(`/StartTrial/StartTrial2?${u}`,{}, {
+                  axios.put(`/StartTrial/StartTrial2?${u}`, {}, {
                         headers: {
                               'Content-Type': 'application/json',
                               'Access-Control-Allow-Origin': '*',
@@ -337,14 +416,15 @@ export default {
                                     that.state.EmailAddress = "";
                                     that.state.isError = false;
                                     that.state.otp_section = false;
-                                    that.state.res_msg = "Company has been created and connecting to your account..!";
+                                    // that.state.res_msg = "Company has been created and connecting to your account..!";
+                                    that.state.res_msg = `MyProHelper is now set up for '${that.state.CompanyName}', connecting to your account!`;
                                     setTimeout(function () {
                                           window.location.href = postResponse.data.RedirectURL
                                     }, 2000);
                               } else {
-                                    that.state.res_msg = "Your company has not been created. Please contact the admin at (844) 376-0001.";
+                                    that.state.res_msg = "MyProHelper has not finished setting up for 'Air Conditioning Specialist' Please contact MyProHelper, Customer Support at (844) 376-0001.";
                                     that.state.isError = true;
-                                    that.phoneState.phoneSubmitted = false;                                   
+                                    that.phoneState.phoneSubmitted = false;
                               }
                         }
                   }).catch(postError => {
@@ -356,8 +436,25 @@ export default {
 
                   });
             },
-            mounted() {
-
+            resendEmail() {
+                  if (this.otpState.canResendEmail) {
+                        this.otpState.canResendEmail = false;                        
+                        this.onUserSubmit(false);
+                  }
+            },
+            changeEmailAddress() {
+                  state.otp_section = false;
+            },
+            resendEmailTimer() {
+                  this.otpState.timer = 30;
+                  const that = this
+                  const interval = setInterval(() => {
+                        that.otpState.timer--;
+                        if (that.otpState.timer <= 0) {
+                              that.otpState.canResendEmail = true;
+                              clearInterval(interval);
+                        }
+                  }, 1000);
             }
       }
 }
@@ -403,7 +500,8 @@ export default {
       padding: 10px 15px;
 }
 
-.free_form button[type=submit] {
+.free_form button[type=submit],
+.free_form button[type=buttons] {
       background: #09426a;
       border: 0;
       padding: 10px 30px;
@@ -412,7 +510,8 @@ export default {
       border-radius: 4px;
 }
 
-.free_form button[type=submit]:hover {
+.free_form button[type=submit]:hover,
+.free_form button[type=buttons]:hover {
       background: #51c2eb;
 }
 
@@ -421,7 +520,7 @@ export default {
       box-shadow: none;
 }
 
-.notification_part {      
+.notification_part {
       margin: 10px auto;
       padding: 8px !important;
 }
