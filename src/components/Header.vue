@@ -195,9 +195,9 @@ export default {
       privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
       tcUrl: "terms_policy.pdf",
       state: {
-        FirstName: CustDetail.FirstName || "Viral",
-        LastName: CustDetail.LastName || "Prajapati",
-        EmailAddress: CustDetail.EmailAddress || "viraldoe1001@yopmail.com",
+        FirstName: CustDetail.FirstName || "",
+        LastName: CustDetail.LastName || "",
+        EmailAddress: CustDetail.EmailAddress || "",
         CompanyName: CustDetail.CompanyName || "",
         res_msg: "",
         otp_section: false,
@@ -309,9 +309,9 @@ export default {
     },
     hideModal(){
       let CustDetail = this.$cookies.get('MPHQR1') || {};
-        this.state.FirstName = CustDetail.FirstName || "Viral";
-        this.state.LastName = CustDetail.LastName || "Prajapati";
-        this.state.EmailAddress = CustDetail.EmailAddress || "viraldoe1001@yopmail.com";
+        this.state.FirstName = CustDetail.FirstName || "";
+        this.state.LastName = CustDetail.LastName || "";
+        this.state.EmailAddress = CustDetail.EmailAddress || "";
         this.state.CompanyName = CustDetail.CompanyName || "";
         this.state.res_msg = "";
         this.state.otp_section = false;
