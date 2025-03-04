@@ -4,6 +4,7 @@ import AboutView from "../views/AboutView.vue";
 import Features from "../views/Features.vue";
 import ContactView from "../views/ContactView.vue";
 import StartFreeTrial from "../views/StartFreeTrial.vue";
+import NotFound from "../views/NotFound.vue";
 
 async function getParams(to) {
   if (Object.keys(to.query).length) {    
@@ -49,12 +50,18 @@ const router = createRouter({
       name: "contact",
       component: ContactView,
     },
+    // {
+    //   path: "/customer-detail",
+    //   name: "customer_detail",
+    //   beforeEnter: getParams,
+    //   component: StartFreeTrial,
+    // },
+    // Catch all 404 - this must be the last route
     {
-      path: "/customer-detail",
-      name: "customer_detail",
-      beforeEnter: getParams,
-      component: StartFreeTrial,
-    },
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: NotFound
+    }
   ],
 });
 
