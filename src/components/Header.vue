@@ -139,8 +139,8 @@
                       <span class="visually-hidden">Loading...</span>
                     </div><br>
                     <span v-if="phoneState.phoneSubmitted" style="font-weight: bold;color: #013289;">Getting
-                      MyProHelper set up for '{{ state.CompanyName
-                      }}'</span>
+                      MyProHelper set up for {{ state.CompanyName
+                      }}</span>
                   </div>
                 </div>
               </form>
