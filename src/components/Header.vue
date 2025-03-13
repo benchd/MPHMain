@@ -117,7 +117,7 @@
             </div>
 
             <div class="col-lg-12" v-if="state.phone_section">
-              <form name="frm-contact" @submit.prevent="onPhoneNumberSubmit" method="post"
+              <form name="frm-contact" @submit.prevent="onWorkersCellPhoneSubmit" method="post"
                 class="php-email-form free_form">
                 <div class="row gy-4">
                   <div class="col-md-12 text-center">
@@ -125,10 +125,10 @@
                   </div>
                   <div class="col-md-12 mt-1">
 
-                    <input type="text" maxlength="16" class="form-control" name="phoneNumber" autocomplete="off" v-maska
-                      data-maska="(###) ###-####" autofocus ref="phoneNumberInput"
-                      :class="{ 'is-invalid': pn$.phoneNumber.$error }" placeholder="Phone Number"
-                      v-model="phoneState.phoneNumber">
+                    <input type="text" maxlength="16" class="form-control" name="WorkersCellPhone" autocomplete="off" v-maska
+                      data-maska="(###) ###-####" autofocus ref="WorkersCellPhoneInput"
+                      :class="{ 'is-invalid': pn$.WorkersCellPhone.$error }" placeholder="Worker Cell Phone Number"
+                      v-model="phoneState.WorkersCellPhone">
                   </div>
 
 
@@ -212,7 +212,7 @@ export default {
         timer: 30
       },
       phoneState: {
-        phoneNumber: "",
+        WorkersCellPhone: "",
         phoneSubmitted: false
       },
       disableStartTrial: false,
@@ -234,7 +234,7 @@ export default {
         VerifyCode: { required, numeric, minLength: minLength(4) },
       },
       phoneState: {
-        phoneNumber: { required, maxLength: maxLength(16) },
+        WorkersCellPhone: { required, maxLength: maxLength(16) },
       },
     }
   },
@@ -283,8 +283,8 @@ export default {
             coookie_data.CompanyCity = response.data.City;
             coookie_data.CompanyState = response.data.State;
             coookie_data.CompanyZip = response.data.ZipCode;
-            coookie_data.CompanyPhone = response.data.PhoneNumber;
-            coookie_data.PhoneNumber = "";
+            coookie_data.CompanyPhone = response.data.WorkersCellPhone;
+            coookie_data.WorkersCellPhone = "";
             coookie_data.FirstName = "";
             coookie_data.LastName = "";
             coookie_data.EmailAddress = "";
@@ -323,7 +323,7 @@ export default {
         this.otpState.otpSubmitted = false;
         this.otpState.canResendEmail = false;
         this.otpState.timer = 30;
-        this.phoneState.phoneNumber = "";
+        this.phoneState.WorkersCellPhone = "";
         this.phoneState.phoneSubmitted = false;
         this.modal.hide();
     },
@@ -423,14 +423,14 @@ export default {
             that.state.otp_section = false;
             that.state.phone_section = true;
             nextTick(() => {
-              that.$refs.phoneNumberInput.focus();
+              that.$refs.WorkersCellPhoneInput.focus();
             });
 
           }
         })
       }
     },
-    onPhoneNumberSubmit() {
+    onWorkersCellPhoneSubmit() {
       this.pn$.$validate();
 
       if (!this.pn$.$error) {
@@ -444,7 +444,7 @@ export default {
       const that = this
       let body_params = {}
       body_params.Guid = guid;
-      body_params.PhoneNumber = this.phoneState.phoneNumber;
+      body_params.WorkersCellPhone = this.phoneState.WorkersCellPhone;
       body_params.FirstName = this.state.FirstName;
       body_params.LastName = this.state.LastName;
       body_params.EmailAddress = this.state.EmailAddress;
