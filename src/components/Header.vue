@@ -409,7 +409,7 @@ export default {
         body_params.emailAddress = this.state.EmailAddress;
         this.otpState.otpSubmitted = true;
         const that = this
-        axios.get('/ValidateEmailAddress', {
+        axios.get('/ValidateEmailAddress/Validate', {
           params: body_params,
           headers: {
             'Content-Type': 'application/json',
@@ -426,6 +426,14 @@ export default {
               that.$refs.WorkersCellPhoneInput.focus();
             });
 
+          }else if (response.status == 412) {
+            that.otpState.otpSubmitted = false;
+            that.state.isError = true;
+            that.state.res_msg = "Invalid verification code";
+          }else if (response.status == 406) {
+            that.otpState.otpSubmitted = false;
+            that.state.isError = true;
+            that.state.res_msg = "Invalid verification code.";
           }
         })
       }
@@ -454,6 +462,7 @@ export default {
       axios.put(`/StartTrial/StartTrial2?${u}`, {}, {
         headers: {
           'Content-Type': 'application/json',
+
           'Access-Control-Allow-Origin': '*',
           'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
           // Add other headers if needed
