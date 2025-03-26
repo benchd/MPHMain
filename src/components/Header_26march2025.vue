@@ -67,7 +67,7 @@
   
                     <div class="col-md-12 text-center">
                       <button type="submit" v-if="!state.submitted">Start Free
-                        Trial</button>
+                        Trail</button>
                       <div class="spinner-border text-primary" role="status" v-if="state.submitted">
                         <span class="visually-hidden">Loading...</span>
                       </div>
@@ -103,7 +103,8 @@
                       <div class="d-flex justify-content-between mt-2">
                         <a href="javascript://" @click="changeEmailAddress">Change Email</a>
                         <a href="javascript://" @click="resendEmail" :disabled="!otpState.canResendEmail">
-                          Resend Email
+                          Resend Email <span v-if="!otpState.canResendEmail"> ({{
+                            otpState.timer }}s)</span>
                         </a>
                       </div>
   
@@ -143,8 +144,9 @@
                       <div class="d-flex justify-content-center mt-2">
                         <a href="javascript://" 
                           @click="resendPhoneOTP" 
-                          :class="{'disabled-link': !phoneState.canResendPhone}">
-                          Resend Code
+                          :class="{'disabled-link': !phoneState.canResendPhone}"
+                          :disabled="!phoneState.canResendPhone">
+                          Resend Code <span v-if="!phoneState.canResendPhone">({{ phoneState.phoneTimer }}s)</span>
                         </a>
                       </div>
                     </div>
@@ -354,21 +356,9 @@
       showModal() {      
         this.modal.show();
         if (this.isValidGuid == true) {
-         
-          setTimeout(() => {  
-            nextTick(() => {
-              const input = this.$refs.inpFirstName;
-              if (input) {
-                input.focus();
-                // Force focus persistently
-                setTimeout(() => {
-                  input.focus();
-                }, 500); // Repeat focus after a delay to reinforce it
-              }
-            });
-          }, 400);
-
+              // this.$refs.inpFirstName.focus();
         }
+  
         this.disableStartTrial = false;
       },
       onUserSubmit(inresponse = true) {
@@ -399,10 +389,14 @@
             that.v$.$reset();
             that.state.submitted = false;
             if (response.status == 200) {
-              that.state.otp_section = true;
-              that.otpState.canResendEmail = true;
+              that.state.otp_section = true
+              that.otpState.canResendEmail = false;
               that.state.isError = false;
               that.state.res_msg = "";
+  
+              setTimeout(() => {
+                that.otpState.canResendEmail = true;
+              }, 30000);
   
               nextTick(() => {
                 that.$refs.verifyCodeInput.focus();
@@ -432,6 +426,7 @@
         }
       },
       onOTPSubmit() {
+  
         this.o$.$validate();
   
         if (!this.o$.$error) {
@@ -439,40 +434,34 @@
           body_params.VerifyCode = this.otpState.VerifyCode;
           body_params.emailAddress = this.state.EmailAddress;
           this.otpState.otpSubmitted = true;
-          const that = this;
-          
+          const that = this
           axios.get('/ValidateEmailAddress/ValidateEmailAddress', {
             params: body_params,
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*',
               'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
+              // Add other headers if needed
             },
-          }).then(response => {
-            that.otpState.otpSubmitted = false;
+          }
+          ).then(response => {
             if (response.status == 200) {
               that.state.otp_section = false;
               that.state.phone_section = true;
               nextTick(() => {
                 that.$refs.WorkersCellPhoneInput.focus();
               });
-            } else {
+  
+            }else if (response.status == 412) {
+              that.otpState.otpSubmitted = false;
               that.state.isError = true;
-              that.state.res_msg = "Please check your email, the verification code you entered did not match.";
-              that.otpState.VerifyCode = ""; // Clear the input
-              nextTick(() => {
-                that.$refs.verifyCodeInput.focus();
-              });
+              that.state.res_msg = "Invalid verification code";
+            }else if (response.status == 406) {
+              that.otpState.otpSubmitted = false;
+              that.state.isError = true;
+              that.state.res_msg = "Invalid verification code.";
             }
-          }).catch(error => {
-            that.otpState.otpSubmitted = false;
-            that.state.isError = true;
-            that.state.res_msg = "Please check your email, the verification code you entered did not match.";
-            that.otpState.VerifyCode = ""; // Clear the input
-            nextTick(() => {
-              that.$refs.verifyCodeInput.focus();
-            });
-          });
+          })
         }
       },
       formatPhoneNumber(phone) {
@@ -491,19 +480,21 @@
           });
   
           if (response.data.issueValidatePhoneNumberResponseEnum === 0) {
+            // Success
             this.phoneState.phoneOtpSection = true;
-            this.phoneState.canResendPhone = true; // Always allow resend
+            this.phoneState.canResendPhone = false;
             this.state.isError = false;
             this.state.res_msg = "";
+            this.startPhoneTimer();
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 1) {
             // Wait 5 minutes
             this.state.isError = true;
             this.state.res_msg = "Please wait 5 minutes before trying again";
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 2) {
             // Already validated
-            this.state.isError = false;
-            this.state.res_msg = "";
-            this.callStartTrial();
+            this.state.isError = true;
+            this.state.res_msg = "Already validated";
+            // this.callStartTrial();
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 3) {
             // Too many attempts
             this.state.isError = true;
@@ -536,7 +527,7 @@
               this.callStartTrial();
             } else {
               this.state.isError = true;
-              this.state.res_msg = "Please check your text message on your phone, the PassCode you entered did not match";
+              this.state.res_msg = "Invalid OTP";
             }
           }else{
             this.state.isError = true;
@@ -547,6 +538,17 @@
           this.state.isError = true;
           this.state.res_msg = "Invalid phone verification code";
         }
+      },
+  
+      startPhoneTimer() {
+        this.phoneState.phoneTimer = 30;
+        const interval = setInterval(() => {
+          this.phoneState.phoneTimer--;
+          if (this.phoneState.phoneTimer <= 0) {
+            this.phoneState.canResendPhone = true;
+            clearInterval(interval);
+          }
+        }, 1000);
       },
   
       resendPhoneOTP() {
