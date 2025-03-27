@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-md-12">
                       <input type="text" name="VerifyCode" v-model="otpState.VerifyCode" class="form-control"
-                        autocomplete="off" maxlength="4" style="text-align:center;letter-spacing: 15px;"
+                        autocomplete="off" maxlength="4" autofocus style="text-align:center;letter-spacing: 15px;"
                         :class="{ 'is-invalid': o$.VerifyCode.$error }" ref="verifyCodeInput">
                     </div>
   
@@ -124,7 +124,7 @@
                     </div>
                     <div class="col-md-12 mt-1">
                       <input type="text" maxlength="16" class="form-control" name="WorkersCellPhone" autocomplete="off" v-maska
-                        data-maska="(###) ###-####"  ref="WorkersCellPhoneInput"
+                        data-maska="(###) ###-####" autofocus ref="WorkersCellPhoneInput"
                         :class="{ 'is-invalid': pn$.WorkersCellPhone.$error }" placeholder="Worker Cell Phone Number"
                         v-model="phoneState.WorkersCellPhone">
                     </div>
@@ -138,7 +138,7 @@
                         maxlength="4" 
                         style="text-align:center;letter-spacing: 15px;"
                         :class="{ 'is-invalid': pn$.phoneVerifyCode.$error }" 
-                        placeholder="Enter 4-digit code" ref="phoneVerifyCodeInput">
+                        placeholder="Enter 4-digit code">
                       
                       <div class="d-flex justify-content-center mt-2">
                         <a href="javascript://" 
@@ -250,7 +250,7 @@
           EmailAddress: { required, email: email },
         },
         otpState: {
-          VerifyCode: { required, minLength: minLength(4) },
+          VerifyCode: { required, numeric, minLength: minLength(4) },
         },
         phoneState: {
           WorkersCellPhone: { required, maxLength: maxLength(16) },
@@ -433,8 +433,7 @@
       },
       onOTPSubmit() {
         this.o$.$validate();
-        this.state.isError = false;
-        this.state.res_msg = "";
+  
         if (!this.o$.$error) {
           const body_params = {};
           body_params.VerifyCode = this.otpState.VerifyCode;
@@ -459,7 +458,7 @@
               });
             } else {
               that.state.isError = true;
-              that.state.res_msg = "Please check your email, the validation code you entered did not match.";
+              that.state.res_msg = "Please check your email, the verification code you entered did not match.";
               that.otpState.VerifyCode = ""; // Clear the input
               nextTick(() => {
                 that.$refs.verifyCodeInput.focus();
@@ -468,7 +467,7 @@
           }).catch(error => {
             that.otpState.otpSubmitted = false;
             that.state.isError = true;
-            that.state.res_msg = "Please check your email, the validation code you entered did not match.";
+            that.state.res_msg = "Please check your email, the verification code you entered did not match.";
             that.otpState.VerifyCode = ""; // Clear the input
             nextTick(() => {
               that.$refs.verifyCodeInput.focus();
@@ -481,7 +480,6 @@
       },
       async sendPhoneOTP() {
         try {
-          
           const formattedPhone = this.formatPhoneNumber(this.phoneState.WorkersCellPhone);
           const response = await axios.get(`/ValidatePhone/SendCode`, {
             params: { PhoneNumber: formattedPhone },
@@ -491,16 +489,12 @@
               'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
             }
           });
+  
           if (response.data.issueValidatePhoneNumberResponseEnum === 0) {
-           
             this.phoneState.phoneOtpSection = true;
             this.phoneState.canResendPhone = true; // Always allow resend
             this.state.isError = false;
             this.state.res_msg = "";
-            const that = this;
-            nextTick(() => {
-              that.$refs.phoneVerifyCodeInput.focus();
-            });
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 1) {
             // Wait 5 minutes
             this.state.isError = true;
@@ -542,25 +536,21 @@
               this.callStartTrial();
             } else {
               this.state.isError = true;
-              this.state.res_msg = "Please check your text message on your phone, the Verification code you entered did not match.";
-              this.phoneState.phoneVerifyCode = "";
+              this.state.res_msg = "Please check your text message on your phone, the PassCode you entered did not match";
             }
           }else{
             this.state.isError = true;
             this.state.res_msg = "Please try again";
-            this.phoneState.phoneVerifyCode = "";
           }
           
         } catch (error) {
           this.state.isError = true;
           this.state.res_msg = "Invalid phone verification code";
-          this.phoneState.phoneVerifyCode = "";
         }
       },
   
       resendPhoneOTP() {
         if (this.phoneState.canResendPhone) {
-          this.phoneState.phoneVerifyCode = "";
           this.sendPhoneOTP();
         }
       },
@@ -581,7 +571,6 @@
       resendEmail() {
         if (this.otpState.canResendEmail) {
           this.otpState.canResendEmail = false;
-          this.otpState.VerifyCode = "";
           this.onUserSubmit(false);
         }
       },
