@@ -92,7 +92,7 @@
                     <div class="col-md-12">
                       <input type="text" name="VerifyCode" v-model="otpState.VerifyCode" class="form-control"
                         autocomplete="off" maxlength="4" style="text-align:center;letter-spacing: 15px;"
-                        :class="{ 'is-invalid': o$.VerifyCode.$error }" ref="verifyCodeInput" spellcheck="false">
+                        :class="{ 'is-invalid': o$.VerifyCode.$error }" ref="verifyCodeInput">
                     </div>
   
   
@@ -128,9 +128,7 @@
                         :class="{ 'is-invalid': pn$.WorkersCellPhone.$error }" placeholder="Worker Cell Phone Number"
                         v-model="phoneState.WorkersCellPhone">
                     </div>
-                    <div>
-                      <span class="text "></span>
-                    </div>
+  
                     <div class="col-md-12" v-if="phoneState.phoneOtpSection">
                       <input type="text" 
                         name="phoneVerifyCode" 
@@ -152,11 +150,8 @@
                     </div>
   
                     <div class="col-md-12 text-center">
-                      <button type="submit" v-if="!phoneState.phoneSubmitted && !phoneState.mobileAlreadyVerified">
+                      <button type="submit" v-if="!phoneState.phoneSubmitted">
                         {{ phoneState.phoneOtpSection ? 'Verify Code' : 'Send Code' }}
-                      </button>
-                      <button type="submit" v-if="phoneState.mobileAlreadyVerified" @click="callStartTrial">
-                        Start Trial
                       </button>
                       <div class="spinner-border text-primary" role="status" v-if="phoneState.phoneSubmitted">
                         <span class="visually-hidden">Loading...</span>
@@ -237,8 +232,7 @@
           phoneOtpSection: false,
           phoneVerifyCode: "",
           canResendPhone: false,
-          phoneTimer: 30,
-          mobileAlreadyVerified : false
+          phoneTimer: 30
         },
         disableStartTrial: false,
         isValidGuid: false,
@@ -514,9 +508,8 @@
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 2) {
             // Already validated
             this.state.isError = false;
-            this.state.res_msg = "Your Phone number already verified, you can start trial.";
-            this.phoneState.mobileAlreadyVerified = true;
-            // this.callStartTrial();
+            this.state.res_msg = "";
+            this.callStartTrial();
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 3) {
             // Too many attempts
             this.state.isError = true;
@@ -607,7 +600,6 @@
         }, 1000);
       },
       callStartTrial() {
-        this.state.res_msg = "";
         const guid = this.$cookies.get('guid');
         const that = this;
         let body_params = {};
