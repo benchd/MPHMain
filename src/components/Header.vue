@@ -139,7 +139,7 @@
                         autocomplete="off" 
                         maxlength="4" 
                         style="text-align:center;letter-spacing: 15px;"
-                        :class="{ 'is-invalid': pn$.phoneVerifyCode.$error }" 
+                        :class="{ 'is-invalid': phoneState.attemptedValidation && pn$.phoneVerifyCode.$error }" 
                         placeholder="Enter 4-digit code" ref="phoneVerifyCodeInput">
                       
                       <div class="d-flex justify-content-center mt-2">
@@ -245,7 +245,8 @@
           phoneVerifyCode: "",
           canResendPhone: false,
           phoneTimer: 30,
-          mobileAlreadyVerified : false
+          mobileAlreadyVerified: false,
+          attemptedValidation: false
         },
         disableStartTrial: false,
         isValidGuid: false,
@@ -364,6 +365,7 @@
           this.phoneState.phoneVerifyCode = "";
           this.phoneState.canResendPhone = false;
           this.phoneState.phoneTimer = 30;
+          this.phoneState.attemptedValidation = false;
           this.showResponseMsg = false;
           this.modal.hide();
       },
@@ -578,11 +580,17 @@
       resendPhoneOTP() {
         if (this.phoneState.canResendPhone) {
           this.phoneState.phoneVerifyCode = "";
+          this.phoneState.attemptedValidation = false;
           this.sendPhoneOTP();
         }
       },
   
       onWorkersCellPhoneSubmit() {
+        if (this.phoneState.phoneOtpSection) {
+          // Set validation flag for the verification code
+          this.phoneState.attemptedValidation = true;
+        }
+        
         this.pn$.$validate();
         console.log('errrrrorr',this.pn$.$error);
         // if (!this.pn$.$error) {
