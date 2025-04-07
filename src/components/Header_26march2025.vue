@@ -36,13 +36,13 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 v-if="!showResponseMsg" class="modal-title fs-5" id="exampleModalLabel"><b>Start Free Trial</b></h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Start Free Trial</b></h1>
             <button type="button" class="btn-close" @click="hideModal()" aria-label="Close"></button>
           </div>
           <div class="modal-body contact" v-if="isValidGuid">
   
             <div class="row">
-              <div class="col-lg-12" v-if="!state.otp_section && !state.phone_section && !showResponseMsg">
+              <div class="col-lg-12" v-if="!state.otp_section && !state.phone_section">
                 <form name="frm-contact" @submit.prevent="onUserSubmit(true)" method="post"
                   class="php-email-form free_form">
   
@@ -67,7 +67,7 @@
   
                     <div class="col-md-12 text-center">
                       <button type="submit" v-if="!state.submitted">Start Free
-                        Trial</button>
+                        Trail</button>
                       <div class="spinner-border text-primary" role="status" v-if="state.submitted">
                         <span class="visually-hidden">Loading...</span>
                       </div>
@@ -82,7 +82,7 @@
   
               </div>
   
-              <div class="col-lg-12" v-if="state.otp_section && !showResponseMsg">
+              <div class="col-lg-12" v-if="state.otp_section">
                 <form name="frm-contact" @submit.prevent="onOTPSubmit" method="post" class="php-email-form free_form">
                   <div class="row gy-4">
                     <div class="col-md-12 text-center">
@@ -91,8 +91,8 @@
                     </div>
                     <div class="col-md-12">
                       <input type="text" name="VerifyCode" v-model="otpState.VerifyCode" class="form-control"
-                        autocomplete="off" maxlength="4" style="text-align:center;letter-spacing: 15px;"
-                        :class="{ 'is-invalid': o$.VerifyCode.$error }" ref="verifyCodeInput" spellcheck="false">
+                        autocomplete="off" maxlength="4" autofocus style="text-align:center;letter-spacing: 15px;"
+                        :class="{ 'is-invalid': o$.VerifyCode.$error }" ref="verifyCodeInput">
                     </div>
   
   
@@ -103,7 +103,8 @@
                       <div class="d-flex justify-content-between mt-2">
                         <a href="javascript://" @click="changeEmailAddress">Change Email</a>
                         <a href="javascript://" @click="resendEmail" :disabled="!otpState.canResendEmail">
-                          Resend Email
+                          Resend Email <span v-if="!otpState.canResendEmail"> ({{
+                            otpState.timer }}s)</span>
                         </a>
                       </div>
   
@@ -115,7 +116,7 @@
                 </form>
               </div>
   
-              <div class="col-lg-12" v-if="state.phone_section && !showResponseMsg">
+              <div class="col-lg-12" v-if="state.phone_section">
                 <form name="frm-contact" @submit.prevent="onWorkersCellPhoneSubmit" method="post"
                   class="php-email-form free_form">
                   <div class="row gy-4">
@@ -124,13 +125,11 @@
                     </div>
                     <div class="col-md-12 mt-1">
                       <input type="text" maxlength="16" class="form-control" name="WorkersCellPhone" autocomplete="off" v-maska
-                        data-maska="(###) ###-####"  ref="WorkersCellPhoneInput"
+                        data-maska="(###) ###-####" autofocus ref="WorkersCellPhoneInput"
                         :class="{ 'is-invalid': pn$.WorkersCellPhone.$error }" placeholder="Worker Cell Phone Number"
                         v-model="phoneState.WorkersCellPhone">
                     </div>
-                    <div>
-                      <span class="text "></span>
-                    </div>
+  
                     <div class="col-md-12" v-if="phoneState.phoneOtpSection">
                       <input type="text" 
                         name="phoneVerifyCode" 
@@ -139,24 +138,22 @@
                         autocomplete="off" 
                         maxlength="4" 
                         style="text-align:center;letter-spacing: 15px;"
-                        :class="{ 'is-invalid': phoneState.attemptedValidation && pn$.phoneVerifyCode.$error }" 
-                        placeholder="Enter 4-digit code" ref="phoneVerifyCodeInput">
+                        :class="{ 'is-invalid': pn$.phoneVerifyCode.$error }" 
+                        placeholder="Enter 4-digit code">
                       
                       <div class="d-flex justify-content-center mt-2">
                         <a href="javascript://" 
                           @click="resendPhoneOTP" 
-                          :class="{'disabled-link': !phoneState.canResendPhone}">
-                          Resend Code
+                          :class="{'disabled-link': !phoneState.canResendPhone}"
+                          :disabled="!phoneState.canResendPhone">
+                          Resend Code <span v-if="!phoneState.canResendPhone">({{ phoneState.phoneTimer }}s)</span>
                         </a>
                       </div>
                     </div>
   
                     <div class="col-md-12 text-center">
-                      <button type="submit" v-if="!phoneState.phoneSubmitted && !phoneState.mobileAlreadyVerified">
+                      <button type="submit" v-if="!phoneState.phoneSubmitted">
                         {{ phoneState.phoneOtpSection ? 'Verify Code' : 'Send Code' }}
-                      </button>
-                      <button type="submit" v-if="phoneState.mobileAlreadyVerified" @click="callStartTrial">
-                        Start Trial
                       </button>
                       <div class="spinner-border text-primary" role="status" v-if="phoneState.phoneSubmitted">
                         <span class="visually-hidden">Loading...</span>
@@ -166,18 +163,11 @@
                 </form>
               </div>
   
-              <div class="col-md-12 text-center sweet_notification" v-if="state.res_msg && !showResponseMsg">
+              <div class="col-md-12 text-center sweet_notification" v-if="state.res_msg">
                 <Transition>
                   <div class="alert text-white h5 notification_part"
                     :class="{ 'alert-danger bg-danger': state.isError, 'alert-success bg-success ': !state.isError }"
                     role="alert">
-                    {{ state.res_msg }}
-                  </div>
-                </Transition>
-              </div>
-              <div class="col-md-12 text-center sweet_notification" v-if="showResponseMsg">
-                <Transition>
-                  <div class="alert text-success h5 notification_part">
                     {{ state.res_msg }}
                   </div>
                 </Transition>
@@ -244,16 +234,13 @@
           phoneOtpSection: false,
           phoneVerifyCode: "",
           canResendPhone: false,
-          phoneTimer: 30,
-          mobileAlreadyVerified: false,
-          attemptedValidation: false
+          phoneTimer: 30
         },
         disableStartTrial: false,
         isValidGuid: false,
         v$: null,
         o$: null,
         pn$: null,
-        showResponseMsg:false
       }
     },
     directives: { tooltip: tooltip, maska: vMaska },
@@ -265,7 +252,7 @@
           EmailAddress: { required, email: email },
         },
         otpState: {
-          VerifyCode: { required, minLength: minLength(4) },
+          VerifyCode: { required, numeric, minLength: minLength(4) },
         },
         phoneState: {
           WorkersCellPhone: { required, maxLength: maxLength(16) },
@@ -343,7 +330,6 @@
         }
       },
       hideModal(){
-          
         let CustDetail = this.$cookies.get('MPHQR1') || {};
           this.state.FirstName = CustDetail.FirstName || "";
           this.state.LastName = CustDetail.LastName || "";
@@ -365,28 +351,14 @@
           this.phoneState.phoneVerifyCode = "";
           this.phoneState.canResendPhone = false;
           this.phoneState.phoneTimer = 30;
-          this.phoneState.attemptedValidation = false;
-          this.showResponseMsg = false;
           this.modal.hide();
       },
       showModal() {      
         this.modal.show();
         if (this.isValidGuid == true) {
-         
-          setTimeout(() => {  
-            nextTick(() => {
-              const input = this.$refs.inpFirstName;
-              if (input) {
-                input.focus();
-                // Force focus persistently
-                setTimeout(() => {
-                  input.focus();
-                }, 500); // Repeat focus after a delay to reinforce it
-              }
-            });
-          }, 400);
-
+              // this.$refs.inpFirstName.focus();
         }
+  
         this.disableStartTrial = false;
       },
       onUserSubmit(inresponse = true) {
@@ -417,10 +389,14 @@
             that.v$.$reset();
             that.state.submitted = false;
             if (response.status == 200) {
-              that.state.otp_section = true;
-              that.otpState.canResendEmail = true;
+              that.state.otp_section = true
+              that.otpState.canResendEmail = false;
               that.state.isError = false;
               that.state.res_msg = "";
+  
+              setTimeout(() => {
+                that.otpState.canResendEmail = true;
+              }, 30000);
   
               nextTick(() => {
                 that.$refs.verifyCodeInput.focus();
@@ -450,48 +426,42 @@
         }
       },
       onOTPSubmit() {
+  
         this.o$.$validate();
-        this.state.isError = false;
-        this.state.res_msg = "";
+  
         if (!this.o$.$error) {
           const body_params = {};
           body_params.VerifyCode = this.otpState.VerifyCode;
           body_params.emailAddress = this.state.EmailAddress;
           this.otpState.otpSubmitted = true;
-          const that = this;
-          
+          const that = this
           axios.get('/ValidateEmailAddress/ValidateEmailAddress', {
             params: body_params,
             headers: {
               'Content-Type': 'application/json',
               'Access-Control-Allow-Origin': '*',
               'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
+              // Add other headers if needed
             },
-          }).then(response => {
-            that.otpState.otpSubmitted = false;
+          }
+          ).then(response => {
             if (response.status == 200) {
               that.state.otp_section = false;
               that.state.phone_section = true;
               nextTick(() => {
                 that.$refs.WorkersCellPhoneInput.focus();
               });
-            } else {
+  
+            }else if (response.status == 412) {
+              that.otpState.otpSubmitted = false;
               that.state.isError = true;
-              that.state.res_msg = "Please check your email, the validation code you entered did not match.";
-              that.otpState.VerifyCode = ""; // Clear the input
-              nextTick(() => {
-                that.$refs.verifyCodeInput.focus();
-              });
+              that.state.res_msg = "Invalid verification code";
+            }else if (response.status == 406) {
+              that.otpState.otpSubmitted = false;
+              that.state.isError = true;
+              that.state.res_msg = "Invalid verification code.";
             }
-          }).catch(error => {
-            that.otpState.otpSubmitted = false;
-            that.state.isError = true;
-            that.state.res_msg = "Please check your email, the validation code you entered did not match.";
-            that.otpState.VerifyCode = ""; // Clear the input
-            nextTick(() => {
-              that.$refs.verifyCodeInput.focus();
-            });
-          });
+          })
         }
       },
       formatPhoneNumber(phone) {
@@ -499,7 +469,6 @@
       },
       async sendPhoneOTP() {
         try {
-          
           const formattedPhone = this.formatPhoneNumber(this.phoneState.WorkersCellPhone);
           const response = await axios.get(`/ValidatePhone/SendCode`, {
             params: { PhoneNumber: formattedPhone },
@@ -509,25 +478,22 @@
               'Richmond': '06A658EA-73C5-4C8D-8280-F5A638EDE2AC'
             }
           });
+  
           if (response.data.issueValidatePhoneNumberResponseEnum === 0) {
-           
+            // Success
             this.phoneState.phoneOtpSection = true;
-            this.phoneState.canResendPhone = true; // Always allow resend
+            this.phoneState.canResendPhone = false;
             this.state.isError = false;
             this.state.res_msg = "";
-            const that = this;
-            nextTick(() => {
-              that.$refs.phoneVerifyCodeInput.focus();
-            });
+            this.startPhoneTimer();
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 1) {
             // Wait 5 minutes
             this.state.isError = true;
             this.state.res_msg = "Please wait 5 minutes before trying again";
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 2) {
             // Already validated
-            this.state.isError = false;
-            this.state.res_msg = "Your Phone number already verified, you can start trial.";
-            this.phoneState.mobileAlreadyVerified = true;
+            this.state.isError = true;
+            this.state.res_msg = "Already validated";
             // this.callStartTrial();
           } else if (response.data.issueValidatePhoneNumberResponseEnum === 3) {
             // Too many attempts
@@ -561,36 +527,37 @@
               this.callStartTrial();
             } else {
               this.state.isError = true;
-              this.state.res_msg = "Please check your text message on your phone, the Verification code you entered did not match.";
-              this.phoneState.phoneVerifyCode = "";
+              this.state.res_msg = "Invalid OTP";
             }
           }else{
             this.state.isError = true;
             this.state.res_msg = "Please try again";
-            this.phoneState.phoneVerifyCode = "";
           }
           
         } catch (error) {
           this.state.isError = true;
           this.state.res_msg = "Invalid phone verification code";
-          this.phoneState.phoneVerifyCode = "";
         }
+      },
+  
+      startPhoneTimer() {
+        this.phoneState.phoneTimer = 30;
+        const interval = setInterval(() => {
+          this.phoneState.phoneTimer--;
+          if (this.phoneState.phoneTimer <= 0) {
+            this.phoneState.canResendPhone = true;
+            clearInterval(interval);
+          }
+        }, 1000);
       },
   
       resendPhoneOTP() {
         if (this.phoneState.canResendPhone) {
-          this.phoneState.phoneVerifyCode = "";
-          this.phoneState.attemptedValidation = false;
           this.sendPhoneOTP();
         }
       },
   
       onWorkersCellPhoneSubmit() {
-        if (this.phoneState.phoneOtpSection) {
-          // Set validation flag for the verification code
-          this.phoneState.attemptedValidation = true;
-        }
-        
         this.pn$.$validate();
         console.log('errrrrorr',this.pn$.$error);
         // if (!this.pn$.$error) {
@@ -606,7 +573,6 @@
       resendEmail() {
         if (this.otpState.canResendEmail) {
           this.otpState.canResendEmail = false;
-          this.otpState.VerifyCode = "";
           this.onUserSubmit(false);
         }
       },
@@ -625,7 +591,6 @@
         }, 1000);
       },
       callStartTrial() {
-        this.state.res_msg = "";
         const guid = this.$cookies.get('guid');
         const that = this;
         let body_params = {};
@@ -655,16 +620,10 @@
               that.state.EmailAddress = "";
               that.state.isError = false;
               that.state.otp_section = false;
-              if(postResponse.data.StatusMessage && postResponse.data.StatusMessage != "")
-              {
-                this.showResponseMsg = true;
-                that.state.res_msg = postResponse.data.StatusMessage;
-              }else{
-                that.state.res_msg = `MyProHelper is now set up for ${that.state.CompanyName}, connecting to your account!`;
-                setTimeout(function () {
-                  window.location.href = postResponse.data.RedirectURL
-                }, 2000);
-              }
+              that.state.res_msg = `MyProHelper is now set up for ${that.state.CompanyName}, connecting to your account!`;
+              setTimeout(function () {
+                window.location.href = postResponse.data.RedirectURL
+              }, 2000);
             } else {
               that.state.res_msg = `MyProHelper has not finished setting up for ${that.state.CompanyName} Please contact MyProHelper, Customer Support at (844) 376-0001.`;
               that.state.isError = true;
