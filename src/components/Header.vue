@@ -20,9 +20,9 @@
             <li><button class="start_free scrollto" type="button" :disabled="disableStartTrial"
                 @click="handleStartFreeTrial">Start Free Trial</button>
             </li>
-            <li><a class="getstarted scrollto ms-0 signin" v-tooltip
+            <li v-if="EnableLoginButton"><a class="getstarted scrollto ms-0 signin" v-tooltip
                 title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription"
-                target="_blank" :href="loginUrl">Login</a></li>
+                target="_blank" :href="loginUrl" v-if="EnableLoginButton">Login</a></li>
           </ul>
           <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
         </nav>
@@ -218,6 +218,7 @@
       return {
         navbar_mobile: false,
         modal: null,
+        EnableLoginButton:false,
         loginUrl: "https://myprohelper.com/login",
         privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
         tcUrl: "terms_policy.pdf",
@@ -684,6 +685,7 @@
       this.loginUrl = this.appSettings.LoginUrl;
       this.tcUrl = this.appSettings.TermCondtionUrl;
       this.privacyUrl = this.appSettings.PrivacyUrl;
+      this.EnableLoginButton = this.appSettings.EnableLoginButton;
     },
     mounted() {
       this.vueOnScroll()
