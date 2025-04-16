@@ -12,6 +12,7 @@
             <router-link to="/" class="nav-link scrollto">Home</router-link>
             <router-link to="/about" class="nav-link scrollto">About Us</router-link>
             <router-link to="/features" class="nav-link scrollto">Features</router-link>
+            <router-link to="/faq" class="nav-link scrollto">FAQ</router-link>
   
             <li><a class="nav-link scrollto" target="_blank" v-bind:href="tcUrl">Terms & Condition</a>
             </li>
