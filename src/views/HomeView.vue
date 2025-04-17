@@ -87,7 +87,7 @@
     </section><!-- End Features Section -->
 
     <!-- ======= Resources Section ======= -->
-    <section class="feature_content">
+    <section id="resources" class="feature_content">
       <div class="container" data-aos="fade-up">
         <div class="row">
           <div class="col-12">
@@ -339,7 +339,7 @@
 
     </section><!-- End Testimonials Section -->
 
-    <section class="technical_supports">
+    <section id="technical_support" class="technical_supports">
       <div class="container">
         <div class="row ">
           <div class="col-12">
@@ -429,7 +429,7 @@
 <script>
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
-import { inject, ref, computed, onMounted } from 'vue';
+import { inject, ref, computed, onMounted, onUnmounted } from 'vue';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
@@ -456,14 +456,65 @@ export default {
       console.log('slide change');
     };
 
-    // Resources section data
-    const appSettings = inject('appSettings');
-    const searchQuery = ref('');
-    const activeTab = ref('all');
-    const documents = ref([]);
+    // Add section IDs for scrolling
+    const sectionIds = ref([
+      'hero',
+      'features',
+      'feature_content',
+      'resources',
+      'pricing',
+      'testimonials',
+      'technical_support'
+    ]);
+    
+    let currentSectionIndex = ref(0);
+    let scrollInterval = ref(null);
 
-    // Initialize documents when component is mounted
+    // Function to scroll to a specific section
+    const scrollToSection = (sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerOffset = 100; // Offset to account for fixed header
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    // Function to handle auto-scrolling
+    const startAutoScroll = () => {
+      scrollInterval.value = setInterval(() => {
+        // Move to next section
+        currentSectionIndex.value = (currentSectionIndex.value + 1) % sectionIds.value.length;
+        
+        // If we're back at the start, add a small delay
+        if (currentSectionIndex.value === 0) {
+          clearInterval(scrollInterval.value);
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Restart the interval after scrolling to top
+            setTimeout(() => {
+              startAutoScroll();
+            }, 1000);
+          }, 2000);
+        } else {
+          scrollToSection(sectionIds.value[currentSectionIndex.value]);
+        }
+      }, 2000); // Scroll every 3 seconds
+    };
+
+    // Start scrolling after page load
     onMounted(() => {
+      // Initial delay before starting auto-scroll
+      setTimeout(() => {
+        startAutoScroll();
+      }, 1000);
+
+      // Load documents
       if (appSettings && appSettings.DocumentsToDisplay) {
         documents.value = appSettings.DocumentsToDisplay;
         console.log('Documents loaded:', documents.value);
@@ -471,7 +522,20 @@ export default {
         console.warn('No documents found in appSettings');
       }
     });
-    
+
+    // Clean up interval when component is unmounted
+    onUnmounted(() => {
+      if (scrollInterval.value) {
+        clearInterval(scrollInterval.value);
+      }
+    });
+
+    // Resources section data
+    const appSettings = inject('appSettings');
+    const searchQuery = ref('');
+    const activeTab = ref('all');
+    const documents = ref([]);
+
     // Filter documents based on search query and active tab
     const filteredDocuments = computed(() => {
       let filtered = documents.value.filter(doc => 
@@ -616,7 +680,12 @@ export default {
       getFileTypeBadgeClass,
       getIconClass,
       getFileIconSvg,
-      getFileUrl
+      getFileUrl,
+      // Add new properties to return
+      sectionIds,
+      currentSectionIndex,
+      scrollToSection,
+      startAutoScroll
     };
   },
 };
