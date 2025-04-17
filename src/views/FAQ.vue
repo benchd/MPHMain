@@ -293,7 +293,6 @@ export default {
 /* Section Header */
 .section-header {
   text-align: center;
-  margin-bottom: 40px;
 }
 
 .section-header .subtitle {
@@ -320,9 +319,9 @@ export default {
 }
 
 /* Resource Tabs */
-.resource_tabs {
+/* .resource_tabs {
   margin: 30px 0;
-}
+} */
 
 .tabs_header {
   display: flex;

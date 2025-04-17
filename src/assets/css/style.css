@@ -40,7 +40,7 @@ h6 {
 # Sections
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 20px 0;
   overflow: hidden;
 }
 
@@ -2672,6 +2672,7 @@ section {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-top: 30px;
 }
 .features_box
 {
