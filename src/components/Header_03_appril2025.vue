@@ -12,7 +12,6 @@
             <router-link to="/" class="nav-link scrollto">Home</router-link>
             <router-link to="/about" class="nav-link scrollto">About Us</router-link>
             <router-link to="/features" class="nav-link scrollto">Features</router-link>
-            <router-link to="/faq" class="nav-link scrollto">FAQ</router-link>
   
             <li><a class="nav-link scrollto" target="_blank" v-bind:href="tcUrl">Terms & Condition</a>
             </li>
@@ -21,9 +20,9 @@
             <li><button class="start_free scrollto" type="button" :disabled="disableStartTrial"
                 @click="handleStartFreeTrial">Start Free Trial</button>
             </li>
-            <li v-if="EnableLoginButton"><a class="getstarted scrollto ms-0 signin" v-tooltip
+            <li><a class="getstarted scrollto ms-0 signin" v-tooltip
                 title="Easy connection to MyProHelper application after your company is setup for a trial or a subscription"
-                target="_blank" :href="loginUrl" v-if="EnableLoginButton">Login</a></li>
+                target="_blank" :href="loginUrl">Login</a></li>
           </ul>
           <i :class="navbar_mobile ? 'bi bi-x mobile-nav-toggle' : 'bi bi-list mobile-nav-toggle'" @click="showMenu"></i>
         </nav>
@@ -37,13 +36,13 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 v-if="!showResponseMsg" class="modal-title fs-5" id="exampleModalLabel"><b>Start Free Trial</b></h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Start Free Trial</b></h1>
             <button type="button" class="btn-close" @click="hideModal()" aria-label="Close"></button>
           </div>
           <div class="modal-body contact" v-if="isValidGuid">
   
             <div class="row">
-              <div class="col-lg-12" v-if="!state.otp_section && !state.phone_section && !showResponseMsg">
+              <div class="col-lg-12" v-if="!state.otp_section && !state.phone_section">
                 <form name="frm-contact" @submit.prevent="onUserSubmit(true)" method="post"
                   class="php-email-form free_form">
   
@@ -83,7 +82,7 @@
   
               </div>
   
-              <div class="col-lg-12" v-if="state.otp_section && !showResponseMsg">
+              <div class="col-lg-12" v-if="state.otp_section">
                 <form name="frm-contact" @submit.prevent="onOTPSubmit" method="post" class="php-email-form free_form">
                   <div class="row gy-4">
                     <div class="col-md-12 text-center">
@@ -116,7 +115,7 @@
                 </form>
               </div>
   
-              <div class="col-lg-12" v-if="state.phone_section && !showResponseMsg">
+              <div class="col-lg-12" v-if="state.phone_section">
                 <form name="frm-contact" @submit.prevent="onWorkersCellPhoneSubmit" method="post"
                   class="php-email-form free_form">
                   <div class="row gy-4">
@@ -140,7 +139,7 @@
                         autocomplete="off" 
                         maxlength="4" 
                         style="text-align:center;letter-spacing: 15px;"
-                        :class="{ 'is-invalid': phoneState.attemptedValidation && pn$.phoneVerifyCode.$error }" 
+                        :class="{ 'is-invalid': pn$.phoneVerifyCode.$error }" 
                         placeholder="Enter 4-digit code" ref="phoneVerifyCodeInput">
                       
                       <div class="d-flex justify-content-center mt-2">
@@ -167,18 +166,11 @@
                 </form>
               </div>
   
-              <div class="col-md-12 text-center sweet_notification" v-if="state.res_msg && !showResponseMsg">
+              <div class="col-md-12 text-center sweet_notification" v-if="state.res_msg">
                 <Transition>
                   <div class="alert text-white h5 notification_part"
                     :class="{ 'alert-danger bg-danger': state.isError, 'alert-success bg-success ': !state.isError }"
                     role="alert">
-                    {{ state.res_msg }}
-                  </div>
-                </Transition>
-              </div>
-              <div class="col-md-12 text-center sweet_notification" v-if="showResponseMsg">
-                <Transition>
-                  <div class="alert text-success h5 notification_part">
                     {{ state.res_msg }}
                   </div>
                 </Transition>
@@ -219,7 +211,6 @@
       return {
         navbar_mobile: false,
         modal: null,
-        EnableLoginButton:false,
         loginUrl: "https://myprohelper.com/login",
         privacyUrl: "https://myprohelper.com:5005/api/PrivacyPolicy", // this was here but doesn't work
         tcUrl: "terms_policy.pdf",
@@ -247,15 +238,13 @@
           phoneVerifyCode: "",
           canResendPhone: false,
           phoneTimer: 30,
-          mobileAlreadyVerified: false,
-          attemptedValidation: false
+          mobileAlreadyVerified : false
         },
         disableStartTrial: false,
         isValidGuid: false,
         v$: null,
         o$: null,
         pn$: null,
-        showResponseMsg:false
       }
     },
     directives: { tooltip: tooltip, maska: vMaska },
@@ -345,7 +334,6 @@
         }
       },
       hideModal(){
-          
         let CustDetail = this.$cookies.get('MPHQR1') || {};
           this.state.FirstName = CustDetail.FirstName || "";
           this.state.LastName = CustDetail.LastName || "";
@@ -367,8 +355,6 @@
           this.phoneState.phoneVerifyCode = "";
           this.phoneState.canResendPhone = false;
           this.phoneState.phoneTimer = 30;
-          this.phoneState.attemptedValidation = false;
-          this.showResponseMsg = false;
           this.modal.hide();
       },
       showModal() {      
@@ -582,17 +568,11 @@
       resendPhoneOTP() {
         if (this.phoneState.canResendPhone) {
           this.phoneState.phoneVerifyCode = "";
-          this.phoneState.attemptedValidation = false;
           this.sendPhoneOTP();
         }
       },
   
       onWorkersCellPhoneSubmit() {
-        if (this.phoneState.phoneOtpSection) {
-          // Set validation flag for the verification code
-          this.phoneState.attemptedValidation = true;
-        }
-        
         this.pn$.$validate();
         console.log('errrrrorr',this.pn$.$error);
         // if (!this.pn$.$error) {
@@ -657,16 +637,10 @@
               that.state.EmailAddress = "";
               that.state.isError = false;
               that.state.otp_section = false;
-              if(postResponse.data.StatusMessage && postResponse.data.StatusMessage != "")
-              {
-                this.showResponseMsg = true;
-                that.state.res_msg = postResponse.data.StatusMessage;
-              }else{
-                that.state.res_msg = `MyProHelper is now set up for ${that.state.CompanyName}, connecting to your account!`;
-                setTimeout(function () {
-                  window.location.href = postResponse.data.RedirectURL
-                }, 2000);
-              }
+              that.state.res_msg = `MyProHelper is now set up for ${that.state.CompanyName}, connecting to your account!`;
+              setTimeout(function () {
+                window.location.href = postResponse.data.RedirectURL
+              }, 2000);
             } else {
               that.state.res_msg = `MyProHelper has not finished setting up for ${that.state.CompanyName} Please contact MyProHelper, Customer Support at (844) 376-0001.`;
               that.state.isError = true;
@@ -686,7 +660,6 @@
       this.loginUrl = this.appSettings.LoginUrl;
       this.tcUrl = this.appSettings.TermCondtionUrl;
       this.privacyUrl = this.appSettings.PrivacyUrl;
-      this.EnableLoginButton = this.appSettings.EnableLoginButton;
     },
     mounted() {
       this.vueOnScroll()

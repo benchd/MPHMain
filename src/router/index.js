@@ -5,6 +5,7 @@ import Features from "../views/Features.vue";
 import ContactView from "../views/ContactView.vue";
 import StartFreeTrial from "../views/StartFreeTrial.vue";
 import NotFound from "../views/NotFound.vue";
+import FAQ from "../views/FAQ.vue";
 
 async function getParams(to) {
   if (Object.keys(to.query).length) {    
@@ -44,6 +45,11 @@ const router = createRouter({
       path: "/features",
       name: "features",
       component: Features,
+    },
+    {
+      path: "/faq",
+      name: "faq",
+      component: FAQ,
     },
     {
       path: "/contact",
